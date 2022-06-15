@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 142106432935846551}
   - component: {fileID: 142106432935846545}
   - component: {fileID: 7401571041389906782}
-  - component: {fileID: 2624598365440930077}
+  - component: {fileID: -5080771311383282946}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 3
---- !u!50 &2624598365440930077
+  speedFall: 2
+--- !u!50 &-5080771311383282946
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -141,9 +141,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4

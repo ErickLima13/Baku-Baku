@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8348076306056907781}
   - component: {fileID: 8348076306056907779}
   - component: {fileID: 8623503001226532977}
-  - component: {fileID: -8065563557815513025}
+  - component: {fileID: -1587820468169015500}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 3
---- !u!50 &-8065563557815513025
+  speedFall: 2
+--- !u!50 &-1587820468169015500
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -141,9 +141,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4

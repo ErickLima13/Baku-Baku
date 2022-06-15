@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 880725693528088016}
   - component: {fileID: 880725693528088018}
   - component: {fileID: 3007283930784488372}
-  - component: {fileID: 5429430122091389010}
+  - component: {fileID: 4018355610374792099}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 3
---- !u!50 &5429430122091389010
+  speedFall: 2
+--- !u!50 &4018355610374792099
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -141,9 +141,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4

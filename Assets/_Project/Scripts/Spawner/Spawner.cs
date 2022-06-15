@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> coins = new List<GameObject>();
+    [SerializeField] private List<GameObject> Pieces = new List<GameObject>();
 
     [Range(0, 5)][SerializeField] private float speedFall;
 
-    [SerializeField] private int countCoins;
+    [SerializeField] private int countPieces;
 
     [SerializeField] private float timeSpawn;
 
@@ -25,36 +25,33 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnCoins();
+        SpawnPieces();
     }
 
-    private void SpawnCoins()
+    private void SpawnPieces()
     {
-        // Move a moeda para baixo
-        //coins[0].transform.Translate(Vector3.down * speedFall * Time.deltaTime);
+        
 
-
+       
 
         timeSpawn -= Time.deltaTime;
 
         if (timeSpawn <= 0)
         {
-            countCoins = 0;
+            countPieces = 0;
         }
 
-       
-
-        if (countCoins == 0 && timeSpawn <= 0)
+        if (countPieces == 0 && timeSpawn <= 0)
         {
             for (int i = 0; i < 2; i++)
             {
-                Instantiate(coins[(Random.Range(0, coins.Count))], RandomPos(), Quaternion.identity);
-                countCoins++;
+                int index = Random.Range(0, Pieces.Count);
+                Instantiate(Pieces[index], RandomPos(), Quaternion.identity);
+                countPieces++;
                 
             }
 
-            timeSpawn = 5;
-
+            timeSpawn = 5; 
             
         }
 
@@ -65,7 +62,7 @@ public class Spawner : MonoBehaviour
 
     private Vector3 RandomPos()
     {
-        return new Vector3(Random.Range(-2, 2) , 5 , 0);
+        return new Vector3(Random.Range(-3.8f, 3.8f), 10, 0);
     }
 
 

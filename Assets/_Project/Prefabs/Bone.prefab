@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7385704957438555620}
   - component: {fileID: 7385704957438555643}
   - component: {fileID: 7385704957438555621}
-  - component: {fileID: 4132651779670821289}
-  - component: {fileID: 199781637788688694}
+  - component: {fileID: 3518068147349314078}
+  - component: {fileID: -587594727441375382}
   m_Layer: 0
   m_Name: Bone
   m_TagString: Untagged
@@ -113,7 +113,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4132651779670821289
+--- !u!114 &3518068147349314078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 3
---- !u!50 &199781637788688694
+  speedFall: 2
+--- !u!50 &-587594727441375382
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -141,9 +141,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
