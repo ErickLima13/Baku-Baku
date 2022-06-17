@@ -3,7 +3,9 @@ using UnityEngine;
 public class PiecesController : MonoBehaviour
 {
 
-    [SerializeField] private float speedFall;
+    [SerializeField] private int Id;
+
+    [SerializeField] private float fall;
     [SerializeField] private float speed;
     [SerializeField] private float timer;
 
@@ -27,8 +29,8 @@ public class PiecesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Move();
+        
     }
 
     private void Move()
@@ -48,9 +50,9 @@ public class PiecesController : MonoBehaviour
                 timer = 0;
             }
 
-            if (PosicaoValida())
+            if (ValidPosition())
             {
-
+                gameManager.UpdateGrid(this);
             }
             else
             {
@@ -69,9 +71,9 @@ public class PiecesController : MonoBehaviour
                 timer = 0;
             }
 
-            if (PosicaoValida())
+            if (ValidPosition())
             {
-
+                gameManager.UpdateGrid(this);
             }
             else
             {
@@ -90,9 +92,9 @@ public class PiecesController : MonoBehaviour
                 timer = 0;
             }
 
-            if (PosicaoValida())
+            if (ValidPosition())
             {
-
+                gameManager.UpdateGrid(this);
             }
             else
             {
@@ -102,29 +104,31 @@ public class PiecesController : MonoBehaviour
             }
         }
 
-        if (Time.time - speedFall >= 1 && !Input.GetKey(KeyCode.DownArrow))
+        if (Time.time - fall >= 1 && !Input.GetKey(KeyCode.DownArrow))
         {
             transform.position += Vector3.down;
 
-            if (PosicaoValida())
+            if (ValidPosition())
             {
-
+                gameManager.UpdateGrid(this);
             }
             else
             {
                 transform.position += Vector3.up;
+                enabled = false;
+                spawner.SpawnPieces();
             }
 
-            speedFall = Time.time;
+            fall = Time.time;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, 90);
 
-            if (PosicaoValida())
+            if (ValidPosition())
             {
-
+                gameManager.UpdateGrid(this);
             }
             else
             {
@@ -143,13 +147,18 @@ public class PiecesController : MonoBehaviour
 
     }
 
-    private bool PosicaoValida()
+    private bool ValidPosition()
     {
         foreach(Transform child in transform)
         {
-            Vector2 posBloco = gameManager.Arredonda(child.position);
+            Vector2 posBlock = gameManager.RoundValue(child.position);
 
-            if (!gameManager.DentroGrade(posBloco))
+            if (!gameManager.InsideGrid(posBlock))
+            {
+                return false;
+            }
+
+            if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
             {
                 return false;
             }
@@ -158,5 +167,6 @@ public class PiecesController : MonoBehaviour
         return true;
     }
 
+  
    
 }

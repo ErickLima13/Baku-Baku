@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1251954535614153401}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,9 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 0
+  Id: 0
+  fall: 0
   speed: 0.1
   timer: 0
+  distance: 4
 --- !u!1 &8675814511360722859
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +147,7 @@ GameObject:
   - component: {fileID: 8700894548913533277}
   m_Layer: 0
   m_Name: Bone
-  m_TagString: Untagged
+  m_TagString: Baby Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

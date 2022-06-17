@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> Pieces = new List<GameObject>();
+    [SerializeField] private List<GameObject> Pieces = new();
 
-    [SerializeField] private List<Quaternion> rotations = new List<Quaternion>();
+    [SerializeField] private List<Vector3> rotations = new();
 
     [SerializeField] private int countPieces;
 
@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SpawnPieces()
@@ -39,12 +39,13 @@ public class Spawner : MonoBehaviour
 
         //if (countPieces == 0 && timeSpawn <= 0)
         //{
-            
-            
+
+
         //}
 
         int index = Random.Range(0, Pieces.Count);
-        Instantiate(Pieces[index], RandomPos(), RandomRot());
+        var rotation = Quaternion.Euler(RandomRot());
+        Instantiate(Pieces[index], RandomPos(), rotation);
 
         //countPieces++;
         //timeSpawn = 5;
@@ -54,14 +55,14 @@ public class Spawner : MonoBehaviour
 
     private Vector3 RandomPos()
     {
-        return new Vector3(Random.Range(2, 6), 18, 0);
+        return new Vector3(Random.Range(2, 5), 18, 0);
     }
 
-    private Quaternion RandomRot()
+    private Vector3 RandomRot()
     {
         int index = Random.Range(0, rotations.Count);
         return rotations[index];
     }
-   
+
 }
 

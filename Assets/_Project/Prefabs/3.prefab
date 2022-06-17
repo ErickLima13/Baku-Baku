@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 457173966097983897}
   m_Layer: 0
   m_Name: Dog
-  m_TagString: Untagged
+  m_TagString: Baby Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 589387154287885116}
   m_Layer: 0
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468eab48258c65c43aeb7bb853da61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFall: 0
+  Id: 0
+  fall: 0
   speed: 0.1
   timer: 0
+  distance: 4
