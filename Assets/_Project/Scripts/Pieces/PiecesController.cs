@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PiecesController : MonoBehaviour
 {
-
-    [SerializeField] private int Id;
-
     [SerializeField] private float fall;
     [SerializeField] private float speed;
     [SerializeField] private float timer;
@@ -167,6 +164,4 @@ public class PiecesController : MonoBehaviour
         return true;
     }
 
-  
-   
 }
