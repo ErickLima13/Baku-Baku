@@ -5,7 +5,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Pieces = new List<GameObject>();
 
-    [Range(0, 5)][SerializeField] private float speedFall;
+    [SerializeField] private List<Quaternion> rotations = new List<Quaternion>();
 
     [SerializeField] private int countPieces;
 
@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
 
     private void Initialization()
     {
-
+        SpawnPieces();
     }
 
     // Start is called before the first frame update
@@ -25,47 +25,43 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnPieces();
+        
     }
 
-    private void SpawnPieces()
+    public void SpawnPieces()
     {
-        
+        //timeSpawn -= Time.deltaTime;
 
-       
+        //if (timeSpawn <= 0)
+        //{
+        //    countPieces = 0;
+        //}
 
-        timeSpawn -= Time.deltaTime;
-
-        if (timeSpawn <= 0)
-        {
-            countPieces = 0;
-        }
-
-        if (countPieces == 0 && timeSpawn <= 0)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                int index = Random.Range(0, Pieces.Count);
-                Instantiate(Pieces[index], RandomPos(), Quaternion.identity);
-                countPieces++;
-                
-            }
-
-            timeSpawn = 5; 
+        //if (countPieces == 0 && timeSpawn <= 0)
+        //{
             
-        }
+            
+        //}
 
-     
+        int index = Random.Range(0, Pieces.Count);
+        Instantiate(Pieces[index], RandomPos(), RandomRot());
+
+        //countPieces++;
+        //timeSpawn = 5;
 
 
     }
 
     private Vector3 RandomPos()
     {
-        return new Vector3(Random.Range(-3.8f, 3.8f), 10, 0);
+        return new Vector3(Random.Range(2, 6), 18, 0);
     }
 
-
+    private Quaternion RandomRot()
+    {
+        int index = Random.Range(0, rotations.Count);
+        return rotations[index];
+    }
    
 }
 
