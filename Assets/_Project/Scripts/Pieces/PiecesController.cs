@@ -50,6 +50,7 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
+               
             }
             else
             {
@@ -71,6 +72,7 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
+                
             }
             else
             {
@@ -92,6 +94,7 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
+                
             }
             else
             {
@@ -108,6 +111,7 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
+               
             }
             else
             {

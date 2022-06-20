@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     public static Transform[,] grid = new Transform[width, heigth];
 
+    public List<Vector3> piecesPos = new();
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,25 @@ public class GameManager : MonoBehaviour
             return grid[(int)pos.x, (int)pos.y];
         }
     }
-   
 
-    
+    public void CheckGrid(GameObject gameObject)
+    {
+
+        piecesPos.Add(gameObject.transform.position);
+
+
+
+        //for (int y = 0; y < heigth; y++)
+        //{
+        //    for (int x = 0; x < width; x++)
+        //    {
+               
+        //    }
+        //}
+
+       
+
+    }
+
+
 }

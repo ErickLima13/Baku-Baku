@@ -17,10 +17,17 @@ public class Food : MonoBehaviour
 {
     public Colors foodColors;
 
+    private GameManager gameManager;
+
+    private void Initialization()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Initialization();
     }
 
     // Update is called once per frame
@@ -33,14 +40,16 @@ public class Food : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Animal animal) && animal.animalColors == foodColors)
         {
-            print(animal.animalColors);
-            print("PEGOU");
+            //print(animal.animalColors);
+            //print("PEGOU");
 
-            Destroy(collision.gameObject, 0.2f);
-            Destroy(this.gameObject, 0.5f);
+            //Destroy(collision.gameObject, 0.2f);
+            //Destroy(this.gameObject, 0.5f);
+
+            
+
+
         }
-
-        print("COLID");
     }
 
     
