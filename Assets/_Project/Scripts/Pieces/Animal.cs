@@ -30,18 +30,49 @@ public class Animal : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Food food) && food.foodColors == animalColors)
         {
-            //print(food.foodColors);
-            //print("PEGOU 2");
-
-            //Destroy(collision.gameObject, 0.2f);
-            //Destroy(this.gameObject, 0.5f);
-
-            print(food);
-            gameManager.CheckGrid(food.gameObject);
+            StartCoroutine(MatchPoint(food));
         }
 
-        
 
+
+    }
+
+    IEnumerator MatchPoint(Food food)
+    {
+        List<Food> matches = SearchHorizontally(food);
+
+        if (matches.Count >= 1)
+        {
+            for (int i = 0; i < matches.Count; i++)
+            {
+                Destroy(matches[i].gameObject);
+                gameManager.foodPieces.Remove(food);
+                matches.Clear();
+                
+            }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+
+    }
+
+    List<Food> SearchHorizontally(Food item)
+    {
+        List<Food> hItems = new() { item };
+
+        if(gameManager.foodPieces != null)
+        {
+            for (int i = 0; i < gameManager.foodPieces.Count; i++)
+            {
+                if (animalColors == gameManager.foodPieces[i].GetComponent<Food>().foodColors)
+                {
+                    hItems.Add(gameManager.foodPieces[i].GetComponent<Food>());
+                }
+            }
+        }
+
+        return hItems;
     }
 
 }

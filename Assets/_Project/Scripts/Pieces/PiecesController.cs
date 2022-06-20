@@ -101,27 +101,16 @@ public class PiecesController : MonoBehaviour
                 transform.position += Vector3.up;
                 enabled = false;
                 spawner.SpawnPieces();
+
+                if (GetComponentInChildren<Food>())
+                {
+                    gameManager.GetFood(gameObject.GetComponentInChildren<Food>());
+                }
+                
             }
         }
 
-        if (Time.time - fall >= 1 && !Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position += Vector3.down;
-
-            if (ValidPosition())
-            {
-                gameManager.UpdateGrid(this);
-               
-            }
-            else
-            {
-                transform.position += Vector3.up;
-                enabled = false;
-                spawner.SpawnPieces();
-            }
-
-            fall = Time.time;
-        }
+        AutomaticFall();
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -146,6 +135,27 @@ public class PiecesController : MonoBehaviour
         //transform.Translate(speedFall * Time.deltaTime * Vector3.down);
 
 
+    }
+
+    private void AutomaticFall()
+    {
+        if (Time.time - fall >= 1 && !Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.position += Vector3.down;
+
+            if (ValidPosition())
+            {
+                gameManager.UpdateGrid(this);
+            }
+            else
+            {
+                transform.position += Vector3.up;
+                enabled = false;
+                spawner.SpawnPieces();
+            }
+
+            fall = Time.time;
+        }
     }
 
     private bool ValidPosition()
