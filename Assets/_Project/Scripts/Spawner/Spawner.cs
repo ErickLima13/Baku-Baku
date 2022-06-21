@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
     [SerializeField] private List<GameObject> Pieces = new();
 
@@ -56,9 +56,14 @@ public class Spawner : MonoBehaviour
         //timeSpawn = 5;
     }
 
+    /// <summary>
+    /// While loop que tenta pegar peças que não sejam da mesma cor.
+    /// </summary>
+    /// <param name="newPieceController"></param>
+    /// <returns></returns>
     private IEnumerator TryInitializePieceController(PiecesController newPieceController)
     {
-        var valid = false;
+        bool valid = false;
         Block animal = animalBlocks[0];
         Block food = foodBlocks[0];
         while (!valid)

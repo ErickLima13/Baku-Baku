@@ -10,7 +10,7 @@ public class Animal : MonoBehaviour
 
     private void Initialization()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.GetInstance();
     }
 
     // Start is called before the first frame update
@@ -31,9 +31,6 @@ public class Animal : MonoBehaviour
         {
             StartCoroutine(MatchPoint(food));
         }
-
-
-
     }
 
     IEnumerator MatchPoint(Food food)
@@ -47,13 +44,11 @@ public class Animal : MonoBehaviour
                 Destroy(matches[i].gameObject);
                 gameManager.foodPieces.Remove(food);
                 matches.Clear();
-                
             }
         }
 
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
-
     }
 
     List<Food> SearchHorizontally(Food item)

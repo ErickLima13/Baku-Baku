@@ -2,27 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public static int heigth = 18;
     public static int width = 6;
 
     public static Transform[,] grid = new Transform[width, heigth];
 
-
     public List<Food> foodPieces = new();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public bool InsideGrid(Vector2 pos)
     {
@@ -72,14 +59,10 @@ public class GameManager : MonoBehaviour
             return grid[(int)pos.x, (int)pos.y];
         } 
     }
-
     
     public void GetFood(Food item)
     {
         foodPieces.Add(item);
     }
-
-
-
 
 }

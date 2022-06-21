@@ -19,6 +19,6 @@ public class BlockObject : MonoBehaviour
         _blockType = myBlock.blockType;
         
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = myBlock.blockAnimation;;
+        animator.runtimeAnimatorController = myBlock.blockAnimation;
     }
 }

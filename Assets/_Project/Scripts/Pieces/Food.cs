@@ -6,12 +6,11 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     public BlockColor _foodBlockColor;
-
     private GameManager gameManager;
 
     private void Initialization()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.GetInstance();
     }
 
     // Start is called before the first frame update
@@ -35,9 +34,6 @@ public class Food : MonoBehaviour
 
             //Destroy(collision.gameObject, 0.2f);
             //Destroy(this.gameObject, 0.5f);
-
-            
-
 
         }
     }

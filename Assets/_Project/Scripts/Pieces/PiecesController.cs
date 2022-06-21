@@ -8,15 +8,14 @@ public class PiecesController : MonoBehaviour
     [SerializeField] private float timer;
 
     private GameManager gameManager;
-
     private Spawner spawner;
 
     private List<BlockObject> blocks = new List<BlockObject>();
 
     public void Initialize(Block animalBlock, Block foodBlock)
     {
-        gameManager = FindObjectOfType<GameManager>();
-        spawner = FindObjectOfType<Spawner>();
+        gameManager = GameManager.GetInstance();
+        spawner = Spawner.GetInstance();
         timer = speed;
         
         blocks.Add(transform.GetChild(0).GetComponent<BlockObject>());
@@ -135,15 +134,8 @@ public class PiecesController : MonoBehaviour
             }
         }
 
-        
-       
-
-        
-
-
         //transform.Translate(speedFall * Time.deltaTime * Vector3.down);
-
-
+        
     }
 
     private void AutomaticFall()
