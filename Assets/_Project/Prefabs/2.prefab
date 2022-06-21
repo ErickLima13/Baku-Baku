@@ -125,7 +125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8c3592f60ca4242489e4bb5258029ca6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b60631ccfc48d9249aeb6969959150f1, type: 3}
   m_Color: {r: 0.5183081, g: 0.17880027, b: 0.9245283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cfb11ffaaca8c478394ee913372359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalColors: 0
+  _animalBlockColor: 0
 --- !u!50 &4780437367835760551
 Rigidbody2D:
   serializedVersion: 4
@@ -272,7 +272,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8c3592f60ca4242489e4bb5258029ca6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b60631ccfc48d9249aeb6969959150f1, type: 3}
   m_Color: {r: 0.6698113, g: 0.06634923, b: 0.06634923, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f1a3368e6d8e340832dba08c83423d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodColors: 4
+  _foodBlockColor: 0
 --- !u!50 &5677072490884757208
 Rigidbody2D:
   serializedVersion: 4

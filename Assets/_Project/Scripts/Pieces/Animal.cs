@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class Animal : MonoBehaviour
 {
-    public Colors animalColors;
+    public BlockColor _animalBlockColor;
     private GameManager gameManager;
 
     private void Initialization()
@@ -28,7 +27,7 @@ public class Animal : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Food food) && food.foodColors == animalColors)
+        if (collision.gameObject.TryGetComponent(out Food food) && food._foodBlockColor == _animalBlockColor)
         {
             StartCoroutine(MatchPoint(food));
         }
@@ -65,7 +64,7 @@ public class Animal : MonoBehaviour
         {
             for (int i = 0; i < gameManager.foodPieces.Count; i++)
             {
-                if (animalColors == gameManager.foodPieces[i].GetComponent<Food>().foodColors)
+                if (_animalBlockColor == gameManager.foodPieces[i].GetComponent<Food>()._foodBlockColor)
                 {
                     hItems.Add(gameManager.foodPieces[i].GetComponent<Food>());
                 }

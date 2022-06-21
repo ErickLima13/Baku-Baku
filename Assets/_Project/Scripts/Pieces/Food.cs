@@ -3,19 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-public enum Colors
-{
-    Purple,
-    Yellow,
-    Green,
-    BabyBlue,
-    Red
-}
-
 public class Food : MonoBehaviour
 {
-    public Colors foodColors;
+    public BlockColor _foodBlockColor;
 
     private GameManager gameManager;
 
@@ -38,7 +28,7 @@ public class Food : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Animal animal) && animal.animalColors == foodColors)
+        if (collision.gameObject.TryGetComponent(out Animal animal) && animal._animalBlockColor == _foodBlockColor)
         {
             //print(animal.animalColors);
             //print("PEGOU");
