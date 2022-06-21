@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int countPieces;
 
     [SerializeField] private float timeSpawn;
+
+    [SerializeField] private PiecesController _piecesController;
+    [SerializeField] private List<Block> animalBlocks = new List<Block>();
+    [SerializeField] private List<Block> foodBlocks = new List<Block>();
 
     private void Initialization()
     {
@@ -45,12 +50,31 @@ public class Spawner : MonoBehaviour
 
         int index = Random.Range(0, Pieces.Count);
         var rotation = Quaternion.Euler(RandomRot());
-        Instantiate(Pieces[index], RandomPos(), rotation);
-
+        var newPieceController = Instantiate(_piecesController, RandomPos(), rotation);
+        StartCoroutine(TryInitializePieceController(newPieceController));
         //countPieces++;
         //timeSpawn = 5;
+    }
 
-
+    private IEnumerator TryInitializePieceController(PiecesController newPieceController)
+    {
+        var valid = false;
+        Block animal = animalBlocks[0];
+        Block food = foodBlocks[0];
+        while (!valid)
+        {
+            animal = animalBlocks[Random.Range(0, animalBlocks.Count)];
+            food = foodBlocks[Random.Range(0, foodBlocks.Count)];
+            if (animal.blockColor != food.blockColor)
+            {
+                valid = true;
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        newPieceController.Initialize(animal, food);
     }
 
     private Vector3 RandomPos()

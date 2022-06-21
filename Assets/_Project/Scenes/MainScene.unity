@@ -2688,6 +2688,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1346429288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7135109280938594202, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_Name
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135109280938594202, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047505425707759078, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db51046078935dd4c995f6d6e4feac52, type: 3}
 --- !u!1 &1350107483
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,6 +3451,19 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -90}
   countPieces: 0
   timeSpawn: 3
+  _piecesController: {fileID: 5109635819970339655, guid: f4394586a25918e468ab28285f46b527, type: 3}
+  animalBlocks:
+  - {fileID: 11400000, guid: b8d473a3b374bc54ba4b1185848e4b15, type: 2}
+  - {fileID: 11400000, guid: 3afa830c2447b8749ae76ba655624f2a, type: 2}
+  - {fileID: 11400000, guid: 14a2bfae5aac79f458bd7ae8dd53a82c, type: 2}
+  - {fileID: 11400000, guid: 1b727f2d0ef85ff4c84593d0854f5181, type: 2}
+  - {fileID: 11400000, guid: 76f5fa56fac20d349bff338f6e61d143, type: 2}
+  foodBlocks:
+  - {fileID: 11400000, guid: 65206d2cdc8ba3b42b413cbe334f7137, type: 2}
+  - {fileID: 11400000, guid: 9d6c03a90632ca94cbc8e83de6b50b8b, type: 2}
+  - {fileID: 11400000, guid: 1c63348d87e93844183d1a25f379fc04, type: 2}
+  - {fileID: 11400000, guid: 3c3318984467d224ca3be0783791ca48, type: 2}
+  - {fileID: 11400000, guid: 16b508139468fe040907a7cbb89902fd, type: 2}
 --- !u!4 &1734271090
 Transform:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 463778e8de52f5543b8955766a7b7d28, type: 3}
-  m_Name: BunnyBlock
+  m_Name: BananaBlock
   m_EditorClassIdentifier: 
   blockType: 1
-  blockColor: 4
-  blockAnimation: {fileID: 7400000, guid: 75a916aa76639ab42b03153acdb4aad5, type: 2}
+  blockColor: 1
+  blockAnimation: {fileID: 22100000, guid: bf7d14dc9cde1db4caf1b272868fa3dd, type: 2}

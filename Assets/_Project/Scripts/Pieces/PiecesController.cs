@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PiecesController : MonoBehaviour
@@ -10,24 +11,32 @@ public class PiecesController : MonoBehaviour
 
     private Spawner spawner;
 
-    private void Initialization()
+    private List<BlockObject> blocks = new List<BlockObject>();
+
+    public void Initialize(Block animalBlock, Block foodBlock)
     {
         gameManager = FindObjectOfType<GameManager>();
         spawner = FindObjectOfType<Spawner>();
         timer = speed;
+        
+        blocks.Add(transform.GetChild(0).GetComponent<BlockObject>());
+        blocks.Add(transform.GetChild(1).GetComponent<BlockObject>());
+        var randomChoice = Random.Range(0, 2);
+        if (randomChoice == 0)
+        {
+            blocks[0].Initialize(foodBlock);
+            blocks[1].Initialize(animalBlock);
+        }
+        else
+        {
+            blocks[0].Initialize(animalBlock);
+            blocks[1].Initialize(foodBlock);
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Initialization();
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Move();
-        
     }
 
     private void Move()
@@ -177,5 +186,4 @@ public class PiecesController : MonoBehaviour
 
         return true;
     }
-
 }

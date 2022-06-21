@@ -7,7 +7,7 @@ public class Block : ScriptableObject
 {
     public BlockType blockType;
     public BlockColor blockColor;
-    public AnimationClip blockAnimation;
+    public AnimatorOverrideController blockAnimation;
 }
 
 public enum BlockColor

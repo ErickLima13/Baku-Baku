@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType: 0
   blockColor: 2
-  blockAnimation: {fileID: 7400000, guid: 3b459ac9a4ac4484a83a0dbae6d8aff1, type: 2}
+  blockAnimation: {fileID: 22100000, guid: 91fc1e5d1ebf3754dbf5e1f8b19bbbde, type: 2}
