@@ -13,6 +13,8 @@ public class PiecesController : MonoBehaviour
 
     private List<BlockObject> blocks = new List<BlockObject>();
 
+
+
     public void Initialize(Block animalBlock, Block foodBlock)
     {
         gameManager = GameManager.GetInstance();
@@ -119,7 +121,16 @@ public class PiecesController : MonoBehaviour
 
                 if (GetComponentInChildren<Food>())
                 {
+                    int x = (int)GetComponentInChildren<Food>().transform.position.x;
+                    int y = (int)GetComponentInChildren<Food>().transform.position.y;
+
+                    Vector2 pos = new(x, y);
+
+                    gameManager.foodPos.Add(pos);
+
                     gameManager.GetFood(gameObject.GetComponentInChildren<Food>());
+                    
+
                 }
                 
             }
@@ -140,9 +151,6 @@ public class PiecesController : MonoBehaviour
                 transform.Rotate(0, 0, -90);
             }
         }
-
-        //transform.Translate(speedFall * Time.deltaTime * Vector3.down);
-        
     }
 
     private void AutomaticFall()

@@ -22,7 +22,7 @@ public class Animal : BlockObject
 
     IEnumerator MatchPoint(Food food)
     {
-        List<Food> matches = SearchHorizontally(food);
+        List<Food> matches = gameManager.Search(food,this.gameObject);
 
         if (matches.Count >= 1)
         {
@@ -33,27 +33,15 @@ public class Animal : BlockObject
                 matches.Clear();
             }
         }
+        else
+        {
+            print("NO MATCH");
+        }
 
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
-    List<Food> SearchHorizontally(Food item)
-    {
-        List<Food> hItems = new() { item };
 
-        if(gameManager.foodPieces != null)
-        {
-            for (int i = 0; i < gameManager.foodPieces.Count; i++)
-            {
-                if (_blockColor == gameManager.foodPieces[i].GetComponent<Food>()._blockColor)
-                {
-                    hItems.Add(gameManager.foodPieces[i].GetComponent<Food>());
-                }
-            }
-        }
-
-        return hItems;
-    }
 
 }

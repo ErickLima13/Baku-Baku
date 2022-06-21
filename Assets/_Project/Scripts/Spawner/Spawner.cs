@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Spawner : Singleton<Spawner>
 {
-    [SerializeField] private List<GameObject> Pieces = new();
-
     [SerializeField] private List<Vector3> rotations = new();
 
-    [SerializeField] private int countPieces;
-
-    [SerializeField] private float timeSpawn;
-
     [SerializeField] private PiecesController _piecesController;
+
     [SerializeField] private List<Block> animalBlocks = new List<Block>();
     [SerializeField] private List<Block> foodBlocks = new List<Block>();
 
@@ -27,33 +22,11 @@ public class Spawner : Singleton<Spawner>
         Initialization();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SpawnPieces()
     {
-        //timeSpawn -= Time.deltaTime;
-
-        //if (timeSpawn <= 0)
-        //{
-        //    countPieces = 0;
-        //}
-
-        //if (countPieces == 0 && timeSpawn <= 0)
-        //{
-
-
-        //}
-
-        int index = Random.Range(0, Pieces.Count);
         var rotation = Quaternion.Euler(RandomRot());
         var newPieceController = Instantiate(_piecesController, RandomPos(), rotation);
         StartCoroutine(TryInitializePieceController(newPieceController));
-        //countPieces++;
-        //timeSpawn = 5;
     }
 
     /// <summary>
