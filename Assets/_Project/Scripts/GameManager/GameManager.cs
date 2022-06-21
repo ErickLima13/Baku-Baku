@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static int heigth = 18;
-    public static int width = 6;
+    private static int height = 18;
+    private static int width = 6;
 
-    public static Transform[,] grid = new Transform[width, heigth];
+    public Transform[,] grid = new Transform[width, height];
 
     public List<Food> foodPieces = new();
 
@@ -23,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 
     public void UpdateGrid(PiecesController piece)
     {
-        for(int y = 0;y < heigth; y++)
+        for(int y = 0;y < height; y++)
         {
             for(int x = 0;x < width; x++)
             {
@@ -41,7 +40,7 @@ public class GameManager : Singleton<GameManager>
         {
             Vector2 pos = RoundValue(block.position);
 
-            if (pos.y < heigth)
+            if (pos.y < height)
             {
                 grid[(int)pos.x, (int)pos.y] = block;
             }
@@ -50,7 +49,7 @@ public class GameManager : Singleton<GameManager>
 
     public Transform PosTransformGrid(Vector2 pos)
     {
-        if(pos.y > heigth - 1)
+        if(pos.y > height - 1)
         {
             return null;
         }

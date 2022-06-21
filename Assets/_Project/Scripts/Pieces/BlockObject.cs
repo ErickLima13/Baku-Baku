@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BlockObject : MonoBehaviour
 {
-    [SerializeField] private BlockColor _blockColor;
-    [SerializeField] private BlockType _blockType;
+    public BlockColor _blockColor;
+    public BlockType _blockType;
     
     private Block myBlock;
     

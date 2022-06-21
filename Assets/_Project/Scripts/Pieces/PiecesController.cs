@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PiecesController : MonoBehaviour
@@ -17,17 +18,23 @@ public class PiecesController : MonoBehaviour
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
         timer = speed;
-        
-        blocks.Add(transform.GetChild(0).GetComponent<BlockObject>());
-        blocks.Add(transform.GetChild(1).GetComponent<BlockObject>());
+
         var randomChoice = Random.Range(0, 2);
         if (randomChoice == 0)
         {
+            transform.GetChild(0).AddComponent<Food>();
+            transform.GetChild(1).AddComponent<Animal>();
+            blocks.Add(transform.GetChild(0).GetComponent<Food>());
+            blocks.Add(transform.GetChild(1).GetComponent<Animal>());
             blocks[0].Initialize(foodBlock);
             blocks[1].Initialize(animalBlock);
         }
         else
         {
+            transform.GetChild(0).AddComponent<Animal>();
+            transform.GetChild(1).AddComponent<Food>();
+            blocks.Add(transform.GetChild(0).GetComponent<Animal>());
+            blocks.Add(transform.GetChild(1).GetComponent<Food>());
             blocks[0].Initialize(animalBlock);
             blocks[1].Initialize(foodBlock);
         }

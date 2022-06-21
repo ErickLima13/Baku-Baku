@@ -3,31 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Animal : MonoBehaviour
+public class Animal : BlockObject
 {
-    public BlockColor _animalBlockColor;
     private GameManager gameManager;
 
-    private void Initialization()
+    void Start()
     {
         gameManager = GameManager.GetInstance();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Initialization();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Food food) && food._foodBlockColor == _animalBlockColor)
+        if (collision.gameObject.TryGetComponent(out Food food) && food._blockColor == _blockColor)
         {
             StartCoroutine(MatchPoint(food));
         }
@@ -59,7 +46,7 @@ public class Animal : MonoBehaviour
         {
             for (int i = 0; i < gameManager.foodPieces.Count; i++)
             {
-                if (_animalBlockColor == gameManager.foodPieces[i].GetComponent<Food>()._foodBlockColor)
+                if (_blockColor == gameManager.foodPieces[i].GetComponent<Food>()._blockColor)
                 {
                     hItems.Add(gameManager.foodPieces[i].GetComponent<Food>());
                 }
