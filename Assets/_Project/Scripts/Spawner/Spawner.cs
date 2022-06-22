@@ -57,7 +57,7 @@ public class Spawner : Singleton<Spawner>
 
     private Vector3 RandomPos()
     {
-        return new Vector3(Random.Range(2, 5), 18, 0);
+        return new Vector3(Random.Range(2, 5), 13, 0);
     }
 
     private Vector3 RandomRot()
