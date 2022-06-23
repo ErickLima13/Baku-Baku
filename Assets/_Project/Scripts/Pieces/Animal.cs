@@ -16,7 +16,7 @@ public class Animal : BlockObject
     {
         if (collision.gameObject.TryGetComponent(out Food food) && food._blockColor == _blockColor)
         {
-            StartCoroutine(MatchPoint(food));
+            //StartCoroutine(MatchPoint(food));
         }
     }
 

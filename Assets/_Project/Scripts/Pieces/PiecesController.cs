@@ -118,20 +118,13 @@ public class PiecesController : MonoBehaviour
                 transform.position += Vector3.up;
                 enabled = false;
                 spawner.SpawnPieces();
+                AnimationFall();
 
-                if (GetComponentInChildren<Food>())
+                if (gameManager.AboveGrid(this))
                 {
-                    int x = (int)GetComponentInChildren<Food>().transform.position.x;
-                    int y = (int)GetComponentInChildren<Food>().transform.position.y;
-
-                    Vector2 pos = new(x, y);
-
-                    gameManager.foodPos.Add(pos);
-
-                    gameManager.GetFood(gameObject.GetComponentInChildren<Food>());
-                    
-
+                    gameManager.GameOver();
                 }
+
                 
             }
         }
@@ -153,6 +146,25 @@ public class PiecesController : MonoBehaviour
         }
     }
 
+    private void AnimationFall()
+    {
+
+
+        for(int i = 0;i < blocks.Count; i++)
+        {
+            
+            blocks[i].GetComponent<Animator>().enabled = false;
+        }
+
+        
+       
+        //blocks[1].GetComponent<Animator>().Play("flip",0,0.0f);
+        //blocks[1].GetComponent<Animator>().enabled = false;
+
+        
+        
+    }
+
     private void AutomaticFall()
     {
         if (Time.time - fall >= 1 && !Input.GetKey(KeyCode.DownArrow))
@@ -168,6 +180,14 @@ public class PiecesController : MonoBehaviour
                 transform.position += Vector3.up;
                 enabled = false;
                 spawner.SpawnPieces();
+
+                AnimationFall();
+
+                if (gameManager.AboveGrid(this))
+                {
+                    gameManager.GameOver();
+                }
+
             }
 
             fall = Time.time;
