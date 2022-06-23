@@ -8,6 +8,7 @@ public class Block : ScriptableObject
     public BlockType blockType;
     public BlockColor blockColor;
     public AnimatorOverrideController blockAnimation;
+    public Sprite frontSprite;
 }
 
 public enum BlockColor

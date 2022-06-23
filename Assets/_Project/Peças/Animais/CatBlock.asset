@@ -15,3 +15,4 @@ MonoBehaviour:
   blockType: 0
   blockColor: 0
   blockAnimation: {fileID: 22100000, guid: cd5e0e700f6f1214aa12503dec2f571a, type: 2}
+  frontSprite: {fileID: 1337583548, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
