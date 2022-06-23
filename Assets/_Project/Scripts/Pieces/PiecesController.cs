@@ -13,8 +13,6 @@ public class PiecesController : MonoBehaviour
 
     private List<BlockObject> blocks = new List<BlockObject>();
 
-
-
     public void Initialize(Block animalBlock, Block foodBlock)
     {
         gameManager = GameManager.GetInstance();
@@ -44,7 +42,11 @@ public class PiecesController : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        if (!gameManager.isPaused)
+        {
+            Move();
+        }
+        
     }
 
     private void Move()
@@ -124,8 +126,6 @@ public class PiecesController : MonoBehaviour
                 {
                     gameManager.GameOver();
                 }
-
-                
             }
         }
 
@@ -148,28 +148,19 @@ public class PiecesController : MonoBehaviour
 
     private void AnimationFall()
     {
-
-
         for(int i = 0;i < blocks.Count; i++)
         {
-            
+            blocks[i].GetComponent<SpriteRenderer>().sprite = blocks[i].myFrontSprite;
             blocks[i].GetComponent<Animator>().enabled = false;
-        }
-
-        
-       
-        //blocks[1].GetComponent<Animator>().Play("flip",0,0.0f);
-        //blocks[1].GetComponent<Animator>().enabled = false;
-
-        
-        
+        }    
     }
 
     private void AutomaticFall()
     {
-        if (Time.time - fall >= 1 && !Input.GetKey(KeyCode.DownArrow))
+        if (Time.time - fall >= (1/gameManager.difficulty) && !Input.GetKey(KeyCode.DownArrow))
         {
             transform.position += Vector3.down;
+            fall = Time.time;
 
             if (ValidPosition())
             {
@@ -190,7 +181,7 @@ public class PiecesController : MonoBehaviour
 
             }
 
-            fall = Time.time;
+            
         }
     }
 

@@ -14,6 +14,12 @@ public class GameManager : Singleton<GameManager>
     public List<Food> foodPieces = new();
     public List<Vector2> foodPos = new();
 
+    public int score;
+
+    public float difficulty = 1;
+
+    public bool isPaused;
+
     public bool InsideGrid(Vector2 pos)
     {
         return (int)pos.x >= 0 && (int)pos.x < width && (int)pos.y >= 0;
@@ -86,6 +92,11 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         print("game over");
+    }
+
+    public void UpdateScore(int value)
+    {
+        score += value;
     }
 
     public void GetFood(Food item)
