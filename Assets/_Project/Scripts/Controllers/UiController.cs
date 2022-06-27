@@ -8,6 +8,7 @@ public class UiController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textSeconds;
     [SerializeField] private TextMeshProUGUI textMinutes;
     [SerializeField] private TextMeshProUGUI textscore;
+    [SerializeField] private TextMeshProUGUI textLifes;
 
     private GameManager gameManager;
 
@@ -39,6 +40,7 @@ public class UiController : MonoBehaviour
         textSeconds.text = seconds.ToString("00");
         textMinutes.text = minutes.ToString();
         textscore.text = gameManager.score.ToString();
+        textLifes.text = gameManager.life.ToString();
 
         if(seconds >= limitSeconds)
         {

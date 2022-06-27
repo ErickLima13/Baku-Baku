@@ -19,6 +19,16 @@ public class GameManager : Singleton<GameManager>
     public float difficulty = 1;
 
     public bool isPaused;
+    public bool isGameOver;
+
+    public int life = 3;
+
+    public GameObject[] pieces;
+
+    private void Update()
+    {
+        
+    }
 
     public bool InsideGrid(Vector2 pos)
     {
@@ -91,7 +101,18 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        print("game over");
+        life--;
+        
+        foreach(GameObject g in pieces)
+        {
+            Destroy(g);
+        }
+
+        if(life == 0)
+        {
+            print("game over");
+            isGameOver = true;
+        }
     }
 
     public void UpdateScore(int value)

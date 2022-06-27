@@ -154,8 +154,13 @@ public class PiecesController : MonoBehaviour
                     {
                         transform.position += Vector3.up;
                         enabled = false;
-                        spawner.SpawnPieces();
+                        
                         AnimationFall();
+
+                        if (!gameManager.isGameOver)
+                        {
+                            spawner.SpawnPieces();
+                        }
 
                         if (gameManager.AboveGrid(this))
                         {
@@ -294,24 +299,6 @@ public class PiecesController : MonoBehaviour
         }
     }
 
-   
-    //public void Rotate(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed && !gameManager)
-    //    {
-    //        transform.Rotate(0, 0, 90);
-
-    //        if (ValidPosition())
-    //        {
-    //            gameManager.UpdateGrid(this);
-    //        }
-    //        else
-    //        {
-    //            transform.Rotate(0, 0, -90);
-    //        }
-    //    }
-    //}
-
     private void AnimationFall()
     {
         for (int i = 0; i < blocks.Count; i++)
@@ -336,19 +323,21 @@ public class PiecesController : MonoBehaviour
             {
                 transform.position += Vector3.up;
                 enabled = false;
-                spawner.SpawnPieces();
-
                 AnimationFall();
+
+                if (!gameManager.isGameOver)
+                {
+                    spawner.SpawnPieces();
+                }
 
                 if (gameManager.AboveGrid(this))
                 {
                     gameManager.GameOver();
                 }
-
             }
-
-
         }
+
+        gameManager.pieces = GameObject.FindGameObjectsWithTag("Player");
     }
 
     private bool ValidPosition()
