@@ -11,6 +11,8 @@ public class Spawner : Singleton<Spawner>
     [SerializeField] private List<Block> animalBlocks = new List<Block>();
     [SerializeField] private List<Block> foodBlocks = new List<Block>();
 
+    private int count = 0;
+
     private void Initialization()
     {
         StartCoroutine(nameof(StartingGame));
@@ -52,7 +54,8 @@ public class Spawner : Singleton<Spawner>
                 yield return new WaitForEndOfFrame();
             }
         }
-        newPieceController.Initialize(animal, food);
+        newPieceController.Initialize(animal, food,count);
+        count++;
     }
 
     private Vector3 RandomPos()

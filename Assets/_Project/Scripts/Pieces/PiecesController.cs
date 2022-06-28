@@ -22,7 +22,7 @@ public class PiecesController : MonoBehaviour
     public float swipeRange;
     public float tapRange;
 
-    public void Initialize(Block animalBlock, Block foodBlock)
+    public void Initialize(Block animalBlock, Block foodBlock,int value)
     {
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
@@ -37,6 +37,11 @@ public class PiecesController : MonoBehaviour
             blocks.Add(transform.GetChild(1).GetComponent<Animal>());
             blocks[0].Initialize(foodBlock);
             blocks[1].Initialize(animalBlock);
+
+            blocks[0].ID = "F" + value.ToString();
+            blocks[1].ID = "A" + value.ToString();
+            
+
         }
         else
         {
@@ -46,7 +51,12 @@ public class PiecesController : MonoBehaviour
             blocks.Add(transform.GetChild(1).GetComponent<Food>());
             blocks[0].Initialize(animalBlock);
             blocks[1].Initialize(foodBlock);
+
+            blocks[0].ID = "A" + value.ToString();
+            blocks[1].ID = "F" + value.ToString();
         }
+
+        
     }
 
     private void Update()
@@ -64,6 +74,8 @@ public class PiecesController : MonoBehaviour
             Swipe();
 #endif
         }
+
+       
     }
 
     public void Swipe()
