@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-//using UnityEngine.InputSystem;
 
 public class PiecesController : MonoBehaviour
 {
@@ -52,6 +51,11 @@ public class PiecesController : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.isGameOver)
+        {
+            return;
+        }
+
         if (!gameManager.isPaused)
         {
 #if UNITY_EDITOR
@@ -155,7 +159,7 @@ public class PiecesController : MonoBehaviour
                     {
                         transform.position += Vector3.up;
                         enabled = false;
-                        
+
                         AnimationFall();
 
                         if (!gameManager.isGameOver)
@@ -289,13 +293,36 @@ public class PiecesController : MonoBehaviour
         {
             transform.Rotate(0, 0, 90);
 
+            //for (int i = 0; i < blocks.Count; i++)
+            //{
+
+            //    var rotation = Quaternion.Euler(gameManager.RoundValue(blocks[i].transform.rotation.eulerAngles));
+
+            //    blocks[i].transform.rotation = rotation;
+            //    blocks[i].transform.position = gameManager.RoundValue(blocks[i].transform.position);
+
+            //}
+
+
+
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
+
             }
             else
             {
                 transform.Rotate(0, 0, -90);
+
+                //for (int i = 0; i < blocks.Count; i++)
+                //{
+
+                //    var rotation = Quaternion.Euler(gameManager.RoundValue(blocks[i].transform.rotation.eulerAngles));
+
+                //    blocks[i].transform.rotation = rotation;
+                //    blocks[i].transform.position = gameManager.RoundValue(blocks[i].transform.position);
+
+                //}
             }
         }
     }

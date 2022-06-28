@@ -12,36 +12,29 @@ public class Animal : BlockObject
         gameManager = GameManager.GetInstance();
     }
 
+    private void Update()
+    {
+        //gameManager.RoundValue(transform.position);
+        //Mathf.RoundToInt(GetComponent<Rigidbody2D>().rotation);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Food food) && food._blockColor == _blockColor)
-        {
-            //StartCoroutine(MatchPoint(food));
-            gameManager.UpdateScore(1);
-        }
+
+        FillNeighbors();
+
+        //if (collision.gameObject.TryGetComponent(out Food food) && food._blockColor == _blockColor)
+        //{
+        //    gameManager.UpdateScore(1);
+            
+        //}
     }
 
-    IEnumerator MatchPoint(Food food)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        List<Food> matches = gameManager.Search(food,this.gameObject);
-
-        if (matches.Count >= 1)
-        {
-            for (int i = 0; i < matches.Count; i++)
-            {
-                Destroy(matches[i].gameObject);
-                gameManager.foodPieces.Remove(food);
-                matches.Clear();
-            }
-        }
-        else
-        {
-            print("NO MATCH");
-        }
-
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        FillNeighbors();
     }
+
 
 
 

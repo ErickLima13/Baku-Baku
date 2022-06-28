@@ -9,6 +9,7 @@ public class Block : ScriptableObject
     public BlockColor blockColor;
     public AnimatorOverrideController blockAnimation;
     public Sprite frontSprite;
+    public LayerMask layer;
 }
 
 public enum BlockColor

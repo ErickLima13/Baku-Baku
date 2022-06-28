@@ -5,17 +5,19 @@ using TMPro;
 
 public class UiController : MonoBehaviour
 {
+    private GameManager gameManager;
+
     [SerializeField] private TextMeshProUGUI textSeconds;
     [SerializeField] private TextMeshProUGUI textMinutes;
     [SerializeField] private TextMeshProUGUI textscore;
     [SerializeField] private TextMeshProUGUI textLifes;
-
-    private GameManager gameManager;
+    [SerializeField] private TextMeshProUGUI textCountdown;
 
     private float seconds;
+    private float timer = 3;
 
     private int minutes;
-    private int limitSeconds = 59;
+    private readonly int limitSeconds = 59;
 
     private void Initialization()
     {
@@ -47,6 +49,16 @@ public class UiController : MonoBehaviour
             minutes++;
             gameManager.difficulty += 0.7f;
             seconds = 0 + 1;
+        }
+
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            textCountdown.text = Mathf.RoundToInt(timer).ToString();
+        }
+        else
+        {
+            textCountdown.enabled = false;
         }
     }
 

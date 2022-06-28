@@ -16,3 +16,6 @@ MonoBehaviour:
   blockColor: 4
   blockAnimation: {fileID: 22100000, guid: aaa2901c541528a43a735dfa56c5210a, type: 2}
   frontSprite: {fileID: 2115072734, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
+  layer:
+    serializedVersion: 2
+    m_Bits: 64

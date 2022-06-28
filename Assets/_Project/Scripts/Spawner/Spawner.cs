@@ -13,7 +13,7 @@ public class Spawner : Singleton<Spawner>
 
     private void Initialization()
     {
-        SpawnPieces();
+        StartCoroutine(nameof(StartingGame));
     }
 
     // Start is called before the first frame update
@@ -66,5 +66,10 @@ public class Spawner : Singleton<Spawner>
         return rotations[index];
     }
 
+    IEnumerator StartingGame()
+    {
+        yield return new WaitForSeconds(3f);
+        SpawnPieces();
+    }
 }
 
