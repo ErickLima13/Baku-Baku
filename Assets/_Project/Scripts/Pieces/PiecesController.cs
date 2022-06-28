@@ -54,11 +54,12 @@ public class PiecesController : MonoBehaviour
     {
         if (!gameManager.isPaused)
         {
-            //Move();
+#if UNITY_EDITOR
+            Move();
+#elif UNITY_ANDROID
             Swipe();
+#endif
         }
-
-        
     }
 
     public void Swipe()
