@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BlockObject : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class BlockObject : MonoBehaviour
 
     public string ID;
 
-    public float radius = 0.3f;
+    private float radius = 0.6f;
 
     public void Initialize(Block block)
     {
@@ -30,59 +31,25 @@ public class BlockObject : MonoBehaviour
 
         animator = GetComponent<Animator>();
         animator.runtimeAnimatorController = myBlock.blockAnimation;
-        neighbors.Add(this);
     }
 
     public void FillNeighbors()
     {
-        //neighbors.Add(Physics2D.OverlapPoint(Vector2.up, playerlayer).GetComponent<BlockObject>());
-        //neighbors.Add(Physics2D.OverlapPoint(Vector2.down, playerlayer).GetComponent<BlockObject>());
-        //neighbors.Add(Physics2D.OverlapPoint(Vector2.left, playerlayer).GetComponent<BlockObject>());
-        //neighbors.Add(Physics2D.OverlapPoint(Vector2.right, playerlayer).GetComponent<BlockObject>());
+        Collider2D[] hitInfo;
+        List<BlockObject> temporary = new();
+        hitInfo = Physics2D.OverlapCircleAll(transform.position, radius, playerlayer);
 
-        Collider2D col = Physics2D.OverlapCircle(transform.position + Vector3.up, radius, playerlayer);
-        Collider2D col1 = Physics2D.OverlapCircle(Vector3.down + transform.position, radius, playerlayer);
-        Collider2D col2 = Physics2D.OverlapCircle(Vector3.left + transform.position, radius, playerlayer);
-        Collider2D col3 = Physics2D.OverlapCircle(Vector3.right + transform.position, radius, playerlayer);
-
-        for (int i = 0; i < neighbors.Count; i++)
+        foreach (Collider2D c in hitInfo)
         {
-            if (col.GetComponent<BlockObject>().ID != neighbors[i].ID)
-            {
-                neighbors.Add(col.GetComponent<BlockObject>());
-            }
-
-            if (col1.GetComponent<BlockObject>().ID != neighbors[i].ID)
-            {
-                neighbors.Add(col.GetComponent<BlockObject>());
-            }
-
-            if (col2.GetComponent<BlockObject>().ID != neighbors[i].ID)
-            {
-                neighbors.Add(col.GetComponent<BlockObject>());
-            }
-
-            if (col3.GetComponent<BlockObject>().ID != neighbors[i].ID)
-            {
-                neighbors.Add(col.GetComponent<BlockObject>());
-            }
+            temporary.Add(c.GetComponent<BlockObject>());
         }
 
-
-
-        //neighbors.Add(Physics2D.OverlapCircle(transform.position, 1f, playerlayer).GetComponent<BlockObject>());
-
-
+        neighbors = temporary.Distinct().ToList();
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Vector3.up + transform.position, radius);
-        Gizmos.DrawWireSphere(Vector3.down + transform.position, radius);
-        Gizmos.DrawWireSphere(Vector3.left + transform.position, radius);
-        Gizmos.DrawWireSphere(Vector3.right + transform.position, radius);
-
-
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

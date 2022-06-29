@@ -19,9 +19,4 @@ public class Food : BlockObject
     {
         FillNeighbors();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        FillNeighbors();
-    }
 }
