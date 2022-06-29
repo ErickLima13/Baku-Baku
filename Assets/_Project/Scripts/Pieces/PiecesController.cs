@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class PiecesController : MonoBehaviour
     public float swipeRange;
     public float tapRange;
 
-    public void Initialize(Block animalBlock, Block foodBlock,int value)
+    public void Initialize(Block animalBlock, Block foodBlock, int value)
     {
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
@@ -40,7 +41,7 @@ public class PiecesController : MonoBehaviour
 
             blocks[0].ID = "F" + value.ToString();
             blocks[1].ID = "A" + value.ToString();
-            
+
 
         }
         else
@@ -56,7 +57,7 @@ public class PiecesController : MonoBehaviour
             blocks[1].ID = "F" + value.ToString();
         }
 
-        
+
     }
 
     private void Update()
@@ -75,7 +76,6 @@ public class PiecesController : MonoBehaviour
 #endif
         }
 
-       
     }
 
     public void Swipe()
@@ -341,10 +341,17 @@ public class PiecesController : MonoBehaviour
 
     private void AnimationFall()
     {
-        for (int i = 0; i < blocks.Count; i++)
+
+        if (blocks[0] != null)
         {
-            blocks[i].GetComponent<SpriteRenderer>().sprite = blocks[i].myFrontSprite;
-            blocks[i].GetComponent<Animator>().enabled = false;
+            blocks[0].GetComponent<SpriteRenderer>().sprite = blocks[0].myFrontSprite;
+            blocks[0].GetComponent<Animator>().enabled = false;
+        }
+
+        if (blocks[1] != null)
+        {
+            blocks[1].GetComponent<SpriteRenderer>().sprite = blocks[1].myFrontSprite;
+            blocks[1].GetComponent<Animator>().enabled = false;
         }
     }
 
