@@ -9,14 +9,15 @@ public class Food : BlockObject
 
     [SerializeField] private List<BlockObject> sameFoods = new();
 
+    private void Awake()
+    {
+        Animal.OnNeighborsDestroyed += SeeNeighbors;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         FillNeighbors();
-
-        if (collision.gameObject.TryGetComponent(out Animal animal))
-        {
-            SearchSameFoods();
-        }
+        SearchSameFoods();
     }
 
     private void SearchSameFoods()
@@ -34,17 +35,16 @@ public class Food : BlockObject
         sameFoods = temporary.Distinct().ToList();
     }
 
-    public void DestroyNeighbors()
+    private void SeeNeighbors(Animal animal)
     {
         foreach(BlockObject b in sameFoods)
         {
-            Destroy(b.gameObject);
+            animal.foods.Add(b);
         }
     }
 
     private void OnDestroy()
     {
-        DestroyNeighbors();
-        gameManager.UpdateScore(1);
+        Animal.OnNeighborsDestroyed -= SeeNeighbors;
     }
 }

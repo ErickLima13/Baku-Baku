@@ -7,9 +7,10 @@ public class Animal : BlockObject
 {
     private GameManager gameManager;
 
-    [SerializeField] private List<BlockObject> foods = new();
+    [SerializeField] public List<BlockObject> foods = new();
 
-    
+    public delegate void SearchNeighbors(Animal animal);
+    public static event SearchNeighbors OnNeighborsDestroyed;
 
     void Start()
     {
@@ -19,25 +20,43 @@ public class Animal : BlockObject
     private void OnCollisionEnter2D(Collision2D collision)
     {
         FillNeighbors();
+        SearchFood();
 
-        if(collision.gameObject.TryGetComponent(out Food  food))
+        if (collision.gameObject.TryGetComponent(out Food food))
         {
-            SearchFood();
+            OnNeighborsDestroyed?.Invoke(this);
 
-            if (food._blockColor == _blockColor)
+            //if(food._blockColor == _blockColor)
+            //{
+            //    foreach (BlockObject b in foods)
+            //    {
+            //        Destroy(b.gameObject);
+            //    }
+            //}
+        }
+
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        List<BlockObject> temporary = new();
+
+        for (int i = 0; i < foods.Count; i++)
+        {
+            if (foods[i]._blockColor == _blockColor)
             {
-                food.DestroyNeighbors();
-                foods.Clear();
-                Destroy(gameObject);
+                temporary.Add(foods[i]);
             }
         }
+
+        foods = temporary.Distinct().ToList();
     }
 
     private void SearchFood()
     {
         List<BlockObject> temporary = new();
 
-        for(int i= 0;i < neighbors.Count; i++)
+        for (int i = 0; i < neighbors.Count; i++)
         {
             if (neighbors[i]._blockColor == _blockColor && neighbors[i]._blockType == BlockType.Food)
             {

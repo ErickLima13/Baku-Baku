@@ -57,7 +57,10 @@ public class PiecesController : MonoBehaviour
             blocks[1].ID = "F" + value.ToString();
         }
 
-
+        for(int i = 0; i < blocks.Count; i++)
+        {
+            blocks[i].GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 
     private void Update()
@@ -305,18 +308,6 @@ public class PiecesController : MonoBehaviour
         {
             transform.Rotate(0, 0, 90);
 
-            //for (int i = 0; i < blocks.Count; i++)
-            //{
-
-            //    var rotation = Quaternion.Euler(gameManager.RoundValue(blocks[i].transform.rotation.eulerAngles));
-
-            //    blocks[i].transform.rotation = rotation;
-            //    blocks[i].transform.position = gameManager.RoundValue(blocks[i].transform.position);
-
-            //}
-
-
-
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
@@ -325,31 +316,22 @@ public class PiecesController : MonoBehaviour
             else
             {
                 transform.Rotate(0, 0, -90);
-
-                //for (int i = 0; i < blocks.Count; i++)
-                //{
-
-                //    var rotation = Quaternion.Euler(gameManager.RoundValue(blocks[i].transform.rotation.eulerAngles));
-
-                //    blocks[i].transform.rotation = rotation;
-                //    blocks[i].transform.position = gameManager.RoundValue(blocks[i].transform.position);
-
-                //}
             }
         }
     }
 
     private void AnimationFall()
     {
-
         if (blocks[0] != null)
         {
+            blocks[0].GetComponent<BoxCollider2D>().enabled = true;
             blocks[0].GetComponent<SpriteRenderer>().sprite = blocks[0].myFrontSprite;
             blocks[0].GetComponent<Animator>().enabled = false;
         }
 
         if (blocks[1] != null)
         {
+            blocks[1].GetComponent<BoxCollider2D>().enabled = true;
             blocks[1].GetComponent<SpriteRenderer>().sprite = blocks[1].myFrontSprite;
             blocks[1].GetComponent<Animator>().enabled = false;
         }
