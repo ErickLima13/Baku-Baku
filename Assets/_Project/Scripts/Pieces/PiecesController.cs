@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PiecesController : MonoBehaviour
 {
@@ -62,6 +64,11 @@ public class PiecesController : MonoBehaviour
         for(int i = 0; i < blocks.Count; i++)
         {
             blocks[i].GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        foreach (Transform child in transform)
+        {
+            child.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z * -1);
         }
     }
 
@@ -295,7 +302,10 @@ public class PiecesController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, 90);
-
+            foreach (Transform child in transform)
+            {
+                child.Rotate(0, 0, -90);
+            }
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
@@ -304,6 +314,10 @@ public class PiecesController : MonoBehaviour
             else
             {
                 transform.Rotate(0, 0, -90);
+                foreach (Transform child in transform)
+                {
+                    child.Rotate(0, 0, 90);
+                }
             }
         }
     }
