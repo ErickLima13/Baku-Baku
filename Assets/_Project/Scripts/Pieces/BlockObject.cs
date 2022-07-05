@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class BlockObject : MonoBehaviour
 {
@@ -14,12 +14,23 @@ public class BlockObject : MonoBehaviour
     protected Animator animator;
 
     public List<BlockObject> neighbors = new();
+    public List<BlockObject> foods = new();
 
     public LayerMask playerlayer;
 
-    public string ID;
+    private string id;
 
     private float radius = 0.6f;
+
+    public string ID
+    {
+        get => id;
+        set
+        {
+            id = value;
+            gameObject.name = _blockType.ToString() + _blockColor.ToString() + id;
+        }
+    }
 
     public void Initialize(Block block)
     {
@@ -33,7 +44,22 @@ public class BlockObject : MonoBehaviour
         animator.runtimeAnimatorController = myBlock.blockAnimation;
     }
 
-    public void FillNeighbors()
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FillNeighbors();
+        SearchFood();
+    }
+
+    private void DetectNeighbors()
+    {
+        if(_blockType == BlockType.Food)
+        {
+
+        }
+    }
+
+    private void FillNeighbors()
     {
         Collider2D[] hitInfo;
         List<BlockObject> temporary = new();
@@ -41,7 +67,10 @@ public class BlockObject : MonoBehaviour
 
         foreach (Collider2D c in hitInfo)
         {
-            temporary.Add(c.GetComponent<BlockObject>());
+            if(c.GetComponent<BlockObject>().ID != ID)
+            {
+                temporary.Add(c.GetComponent<BlockObject>());
+            }
         }
 
         neighbors = temporary.Distinct().ToList();
@@ -51,5 +80,21 @@ public class BlockObject : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+
+    private void SearchFood()
+    {
+        List<BlockObject> temporary = new();
+
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            if (neighbors[i]._blockColor == _blockColor && neighbors[i]._blockType == BlockType.Food)
+            {
+                temporary.Add(neighbors[i]);
+            }
+        }
+
+        foods = temporary.Distinct().ToList();
     }
 }
