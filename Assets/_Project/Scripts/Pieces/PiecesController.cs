@@ -74,11 +74,6 @@ public class PiecesController : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.isGameOver)
-        {
-            return;
-        }
-
         if (!gameManager.isPaused)
         {
 #if UNITY_EDITOR
