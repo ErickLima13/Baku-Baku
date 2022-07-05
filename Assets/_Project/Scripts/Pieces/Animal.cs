@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -39,11 +40,14 @@ public class Animal : BlockObject
             }
         }
 
-        foreach (var food in processed)
+        if (processed.Any())
         {
-            Debug.Log(food.gameObject.name);
+            StartCoroutine(EatAnimation());
         }
+    }
 
-
+    private IEnumerator EatAnimation()
+    {
+        throw new NotImplementedException();
     }
 }

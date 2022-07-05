@@ -46,13 +46,12 @@ public class GameManager : Singleton<GameManager>
                         
                     }
                 }
-                
             }
         }
 
         foreach (Transform block in piece.transform)
         {
-            Vector2 pos = RoundValue(block.position); 
+            Vector2 pos = RoundValue(block.position);
 
             if (pos.y < height)
             {
@@ -110,6 +109,5 @@ public class GameManager : Singleton<GameManager>
     {
         score += value;
     }
-
 
 }

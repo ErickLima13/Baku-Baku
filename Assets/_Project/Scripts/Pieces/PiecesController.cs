@@ -224,7 +224,10 @@ public class PiecesController : MonoBehaviour
     private void Move()
     {
         if (transform.childCount <= 1)
+        {
             return;
+        }
+
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             timer = speed;
@@ -322,7 +325,12 @@ public class PiecesController : MonoBehaviour
 
     private void AutomaticFall()
     {
-        if (Time.time - fall >= (1 / gameManager.difficulty) && !Input.GetKey(KeyCode.DownArrow))
+        var difficulty = gameManager.difficulty;
+        if (transform.childCount <= 1)
+        {
+            difficulty = gameManager.difficulty * 8;
+        }
+        if (Time.time - fall >= (1 / difficulty) && !(Input.GetKey(KeyCode.DownArrow) && transform.childCount > 1))
         {
             transform.position += Vector3.down;
             fall = Time.time;
