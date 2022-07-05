@@ -46,14 +46,13 @@ public class GameManager : Singleton<GameManager>
                         
                     }
                 }
-
-
+                
             }
         }
 
         foreach (Transform block in piece.transform)
         {
-            Vector2 pos = RoundValue(block.position); // posição do bloco no grid
+            Vector2 pos = RoundValue(block.position); // posiï¿½ï¿½o do bloco no grid
 
             if (pos.y < height)
             {

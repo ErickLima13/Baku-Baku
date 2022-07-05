@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class BlockObject : MonoBehaviour
@@ -14,7 +15,9 @@ public class BlockObject : MonoBehaviour
     protected Animator animator;
 
     public List<BlockObject> neighbors = new();
-    public List<BlockObject> foods = new();
+    public List<Food> foods = new();
+
+    public List<Food> processed = new();
 
     public LayerMask playerlayer;
 
@@ -49,14 +52,7 @@ public class BlockObject : MonoBehaviour
     {
         FillNeighbors();
         SearchFood();
-    }
-
-    private void DetectNeighbors()
-    {
-        if(_blockType == BlockType.Food)
-        {
-
-        }
+        FindAllFoodRecursively();
     }
 
     private void FillNeighbors()
@@ -85,16 +81,21 @@ public class BlockObject : MonoBehaviour
 
     private void SearchFood()
     {
-        List<BlockObject> temporary = new();
-
+        List<Food> temporary = new();
+        
         for (int i = 0; i < neighbors.Count; i++)
         {
             if (neighbors[i]._blockColor == _blockColor && neighbors[i]._blockType == BlockType.Food)
             {
-                temporary.Add(neighbors[i]);
+                temporary.Add(neighbors[i].GetComponent<Food>());
+                // var additionalFood = neighbors[i].DetectFood();
             }
         }
-
         foods = temporary.Distinct().ToList();
+    }
+    
+    protected virtual void FindAllFoodRecursively()
+    {
+        //
     }
 }
