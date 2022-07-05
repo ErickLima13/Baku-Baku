@@ -76,9 +76,9 @@ public class GameManager : Singleton<GameManager>
     {
         for(int x = 0;x < width; x++)
         {
-            foreach (Transform block in piecesController.transform)
+            foreach (var block in piecesController.Blocks)
             {
-                Vector2 pos = RoundValue(block.position);
+                Vector2 pos = RoundValue(block.transform.position);
 
                 if(pos.y > height - 1)
                 {

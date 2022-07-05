@@ -23,6 +23,8 @@ public class PiecesController : MonoBehaviour
     public float swipeRange;
     public float tapRange;
 
+    public List<BlockObject> Blocks => blocks;
+
     public void Initialize(Block animalBlock, Block foodBlock, int value)
     {
         gameManager = GameManager.GetInstance();
