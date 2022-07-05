@@ -77,6 +77,7 @@ public class PiecesController : MonoBehaviour
 #elif UNITY_ANDROID
             Swipe();
 #endif
+            AutomaticFall();
         }
 
     }
@@ -88,8 +89,6 @@ public class PiecesController : MonoBehaviour
             startTouchPosition = Input.GetTouch(0).position;
             timer = speed;
         }
-
-        AutomaticFall();
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
@@ -224,6 +223,8 @@ public class PiecesController : MonoBehaviour
     }
     private void Move()
     {
+        if (transform.childCount <= 1)
+            return;
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             timer = speed;
@@ -283,11 +284,9 @@ public class PiecesController : MonoBehaviour
                 timer = 0;
             }
 
-            PieceValidPosition();
+            FallAlgorithm();
         }
-
-        AutomaticFall();
-
+        
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, 90);
@@ -327,30 +326,39 @@ public class PiecesController : MonoBehaviour
         {
             transform.position += Vector3.down;
             fall = Time.time;
-            PieceValidPosition();
+            FallAlgorithm();
         }
     }
 
-    private void PieceValidPosition()
+    private void FallAlgorithm()
     {
-        if (ValidPosition())
+        List<Transform> badChildren = GetInvalidChildrenPositions();
+        if (badChildren.Any() == false)
         {
             gameManager.UpdateGrid(this);
         }
         else
         {
             transform.position += Vector3.up;
-            enabled = false;
-            AnimationFall();
-
-            if (!gameManager.isGameOver)
+            foreach (var child in badChildren)
             {
-                spawner.SpawnPieces();
+                child.parent = null;
             }
 
-            if (gameManager.AboveGrid(this))
+            if (transform.childCount == 0)
             {
-                gameManager.GameOver();
+                enabled = false;
+                AnimationFall();
+
+                if (!gameManager.isGameOver)
+                {
+                    spawner.SpawnPieces();
+                }
+
+                if (gameManager.AboveGrid(this))
+                {
+                    gameManager.GameOver();
+                }
             }
         }
 
@@ -359,32 +367,42 @@ public class PiecesController : MonoBehaviour
 
     private bool ValidPosition()
     {
-        List<Transform> transformsList = new();
-        
         foreach (Transform child in transform)
         {
-            transformsList.Add(child);
-
             Vector2 posBlock = gameManager.RoundValue(child.position);
 
             if (!gameManager.InsideGrid(posBlock))
             {
                 return false;
             }
-
+            //Se tem algo na posição que quero E o pai que está na posição é diferente do meu pai
             if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
             {
-                child.parent = null;
-                transformsList.Remove(child);
+                return false;
             }
         }
 
-        if (transformsList.Any() == false)
+        return true;
+    }
+    
+    private List<Transform> GetInvalidChildrenPositions()
+    {
+        List<Transform> badChildren = new List<Transform>();
+        foreach (Transform child in transform)
         {
-            return false;
+            Vector2 posBlock = gameManager.RoundValue(child.position);
+            if (!gameManager.InsideGrid(posBlock))
+            {
+                badChildren.Add(child);
+            }
+            //Se tem algo na posição que quero E o pai que está na posição é diferente do meu pai
+            else if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
+            {
+                badChildren.Add(child);
+            }
         }
 
-        return true;
+        return badChildren;
     }
 
 }
