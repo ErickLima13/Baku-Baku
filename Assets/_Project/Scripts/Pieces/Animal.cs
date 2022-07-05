@@ -43,5 +43,7 @@ public class Animal : BlockObject
         {
             Debug.Log(food.gameObject.name);
         }
+
+
     }
 }

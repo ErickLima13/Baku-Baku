@@ -283,23 +283,7 @@ public class PiecesController : MonoBehaviour
                 timer = 0;
             }
 
-            if (ValidPosition())
-            {
-                gameManager.UpdateGrid(this);
-
-            }
-            else
-            {
-                transform.position += Vector3.up;
-                enabled = false;
-                spawner.SpawnPieces();
-                AnimationFall();
-
-                if (gameManager.AboveGrid(this))
-                {
-                    gameManager.GameOver();
-                }
-            }
+            PieceValidPosition();
         }
 
         AutomaticFall();
@@ -343,26 +327,30 @@ public class PiecesController : MonoBehaviour
         {
             transform.position += Vector3.down;
             fall = Time.time;
+            PieceValidPosition();
+        }
+    }
 
-            if (ValidPosition())
+    private void PieceValidPosition()
+    {
+        if (ValidPosition())
+        {
+            gameManager.UpdateGrid(this);
+        }
+        else
+        {
+            transform.position += Vector3.up;
+            enabled = false;
+            AnimationFall();
+
+            if (!gameManager.isGameOver)
             {
-                gameManager.UpdateGrid(this);
+                spawner.SpawnPieces();
             }
-            else
+
+            if (gameManager.AboveGrid(this))
             {
-                transform.position += Vector3.up;
-                enabled = false;
-                AnimationFall();
-
-                if (!gameManager.isGameOver)
-                {
-                    spawner.SpawnPieces();
-                }
-
-                if (gameManager.AboveGrid(this))
-                {
-                    gameManager.GameOver();
-                }
+                gameManager.GameOver();
             }
         }
 
@@ -371,8 +359,12 @@ public class PiecesController : MonoBehaviour
 
     private bool ValidPosition()
     {
+        List<Transform> transformsList = new();
+        
         foreach (Transform child in transform)
         {
+            transformsList.Add(child);
+
             Vector2 posBlock = gameManager.RoundValue(child.position);
 
             if (!gameManager.InsideGrid(posBlock))
@@ -382,8 +374,14 @@ public class PiecesController : MonoBehaviour
 
             if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
             {
-                return false;
+                child.parent = null;
+                transformsList.Remove(child);
             }
+        }
+
+        if (transformsList.Any() == false)
+        {
+            return false;
         }
 
         return true;

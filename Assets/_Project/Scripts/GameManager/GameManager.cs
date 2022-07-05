@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
 
         foreach (Transform block in piece.transform)
         {
-            Vector2 pos = RoundValue(block.position); // posi��o do bloco no grid
+            Vector2 pos = RoundValue(block.position); 
 
             if (pos.y < height)
             {
