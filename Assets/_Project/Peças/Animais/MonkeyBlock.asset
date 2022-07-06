@@ -19,3 +19,4 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+  overrideController: {fileID: 22100000, guid: aae8968dfa50b6f41aa02ec7272d4a7a, type: 2}
