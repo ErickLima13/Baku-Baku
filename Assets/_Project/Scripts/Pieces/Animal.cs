@@ -8,11 +8,14 @@ public class Animal : BlockObject
 {
     private GameManager gameManager;
 
-
+    private GameObject cloneEatEffect;
 
     void Start()
     {
         gameManager = GameManager.GetInstance();
+
+        cloneEatEffect = Instantiate(eatEffect, transform);
+        cloneEatEffect.SetActive(false);
     }
 
     protected override void FindAllFoodRecursively()
@@ -46,22 +49,35 @@ public class Animal : BlockObject
 
     private IEnumerator EatAnimation()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
+
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        //var cloneEatEffect = Instantiate(eatEffect, transform);
+
+        cloneEatEffect.SetActive(true);
+        var animatorClone = cloneEatEffect.GetComponent<Animator>();
+        animatorClone.runtimeAnimatorController = myBlock.overrideController;
 
         foreach (Food f in processed)
         {
-            transform.position = f.transform.position;
-            Destroy(f.gameObject,1);
-            
-            yield return new WaitForSeconds(0.5f);
+            if (f != null)
+            {
+                if(f.transform.position.x >= 3)
+                {
+                    cloneEatEffect.GetComponent<SpriteRenderer>().flipX = true;
+                }
 
+                transform.position = f.transform.position;
+                Destroy(f.gameObject, 0.1f);
+
+                yield return new WaitForSeconds(0.2f);
+            }
         }
 
         gameManager.UpdateScore(processed.Count);
         processed.Clear();
-        Destroy(gameObject, 1f);
-
+        Destroy(gameObject, 0.7f);
+        StopAllCoroutines();
     }
-
-
 }

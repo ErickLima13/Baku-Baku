@@ -359,3 +359,4 @@ MonoBehaviour:
   timer: 0
   swipeRange: 50
   tapRange: 10
+  eatEffect: {fileID: 2864969874526829554, guid: a52e3817ad94a8f41a0acc0d86c31606, type: 3}

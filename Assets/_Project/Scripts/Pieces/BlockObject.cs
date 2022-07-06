@@ -10,7 +10,7 @@ public class BlockObject : MonoBehaviour
 
     public Sprite myFrontSprite;
 
-    private Block myBlock;
+    protected Block myBlock;
 
     protected Animator animator;
 
@@ -24,6 +24,8 @@ public class BlockObject : MonoBehaviour
     private string id;
 
     private float radius = 0.6f;
+
+    public GameObject eatEffect;
 
     public string ID
     {
@@ -47,12 +49,12 @@ public class BlockObject : MonoBehaviour
         animator.runtimeAnimatorController = myBlock.blockAnimation;
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         FillNeighbors();
         SearchFood();
         FindAllFoodRecursively();
+        
     }
 
     private void FillNeighbors()
@@ -97,5 +99,17 @@ public class BlockObject : MonoBehaviour
     protected virtual void FindAllFoodRecursively()
     {
         //
+    }
+
+    private void GridFitting()
+    {
+        if (!neighbors.Any())
+        {
+            transform.position += Vector3.down;
+        }
+        else
+        {
+            return;
+        }
     }
 }
