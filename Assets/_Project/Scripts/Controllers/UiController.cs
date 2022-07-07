@@ -47,7 +47,7 @@ public class UiController : MonoBehaviour
         if(seconds >= limitSeconds)
         {
             minutes++;
-            gameManager.difficulty += 0.7f;
+            gameManager.difficulty += 0.3f;
             seconds = 0 + 1;
         }
 

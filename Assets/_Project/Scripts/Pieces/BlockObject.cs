@@ -31,7 +31,7 @@ public class BlockObject : MonoBehaviour
 
     protected GameManager gameManager;
 
-    public RaycastHit2D hit2D;
+    private RaycastDetect raycastDetect;
 
     public string ID
     {
@@ -58,7 +58,7 @@ public class BlockObject : MonoBehaviour
     private void Initialization()
     {
         gameManager = GameManager.GetInstance();
-        
+        //raycastDetect = GetComponent<RaycastDetect>();
     }
 
     private void Start()
@@ -66,17 +66,11 @@ public class BlockObject : MonoBehaviour
         Initialization();
     }
 
-    private void Update()
-    {
-        GridFitting();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         FillNeighbors();
         SearchFood();
         FindAllFoodRecursively();
-        
     }
 
     private void FillNeighbors()
@@ -103,7 +97,6 @@ public class BlockObject : MonoBehaviour
 
     }
 
-
     private void SearchFood()
     {
         List<Food> temporary = new();
@@ -123,62 +116,4 @@ public class BlockObject : MonoBehaviour
     {
         //
     }
-
-    private void GridFitting()
-    {
-        hit2D = Physics2D.Raycast(transform.position, Vector2.down, 1);
-        Debug.DrawRay(transform.position * 1, Vector2.down * 1, Color.red);
-
-        if (!hit2D.collider && transform.parent == null)
-        {
-            transform.position += Vector3.down;
-            print("to aqui");
-        }
-        else
-        {
-            return;
-
-        }
-    }
-
-    public void AutomaticFall()
-    {
-        if (Time.time - fall >= 1)
-        {
-            transform.position += Vector3.down;
-            fall = Time.time;
-            FallAlgorithm();
-        }
-    }
-
-    public void FallAlgorithm()
-    {
-        if (ValidPosition())
-        {
-            gameManager.UpdateGrid(GetComponentInParent<PiecesController>());
-        }
-        else
-        {
-            transform.position += Vector3.up;
-        }
-    }
-
-    private bool ValidPosition()
-    {
-        Vector2 posBlock = gameManager.RoundValue(transform.position);
-
-        if (!gameManager.InsideGrid(posBlock))
-        {
-            return false;
-        }
-
-
-        if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock) != transform)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
 }

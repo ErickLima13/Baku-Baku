@@ -72,6 +72,8 @@ public class PiecesController : MonoBehaviour
         {
             child.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z * -1);
         }
+
+        
     }
 
     private void Initialization()
@@ -79,6 +81,9 @@ public class PiecesController : MonoBehaviour
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
         timer = speed;
+
+        //gameManager.pieces.Add(blocks[0].gameObject);
+        //gameManager.pieces.Add(blocks[1].gameObject);
     }
 
     private void Start()
@@ -346,6 +351,7 @@ public class PiecesController : MonoBehaviour
         if (blocks[0] != null)
         {
             blocks[0].GetComponent<BoxCollider2D>().enabled = true;
+            blocks[0].GetComponent<RaycastDetect>().enabled = true;
             blocks[0].GetComponent<SpriteRenderer>().sprite = blocks[0].myFrontSprite;
             blocks[0].GetComponent<Animator>().enabled = false;
         }
@@ -353,6 +359,7 @@ public class PiecesController : MonoBehaviour
         if (blocks[1] != null)
         {
             blocks[1].GetComponent<BoxCollider2D>().enabled = true;
+            blocks[1].GetComponent<RaycastDetect>().enabled = true;
             blocks[1].GetComponent<SpriteRenderer>().sprite = blocks[1].myFrontSprite;
             blocks[1].GetComponent<Animator>().enabled = false;
         }
