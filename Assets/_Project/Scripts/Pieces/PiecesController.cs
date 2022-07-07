@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -63,7 +62,7 @@ public class PiecesController : MonoBehaviour
             blocks[1].ID = "F" + value.ToString();
         }
 
-        for(int i = 0; i < blocks.Count; i++)
+        for (int i = 0; i < blocks.Count; i++)
         {
             blocks[i].GetComponent<BoxCollider2D>().enabled = false;
         }
@@ -73,7 +72,7 @@ public class PiecesController : MonoBehaviour
             child.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z * -1);
         }
 
-        
+
     }
 
     private void Initialization()
@@ -81,9 +80,6 @@ public class PiecesController : MonoBehaviour
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
         timer = speed;
-
-        //gameManager.pieces.Add(blocks[0].gameObject);
-        //gameManager.pieces.Add(blocks[1].gameObject);
     }
 
     private void Start()
@@ -95,11 +91,11 @@ public class PiecesController : MonoBehaviour
     {
         if (!gameManager.isPaused)
         {
-#if UNITY_EDITOR
+            //#if UNITY_EDITOR
             Move();
-#elif UNITY_ANDROID
+            //#elif UNITY_ANDROID
             Swipe();
-#endif
+            //#endif
             AutomaticFall();
             SelfDestruct();
         }
@@ -109,14 +105,19 @@ public class PiecesController : MonoBehaviour
 
     private void SelfDestruct()
     {
-        if(transform.childCount == 0)
+        if (transform.childCount == 0)
         {
-            Destroy(gameObject,1f);
+            Destroy(gameObject, 1f);
         }
     }
 
     public void Swipe()
     {
+        if (transform.childCount <= 1)
+        {
+            return;
+        }
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             startTouchPosition = Input.GetTouch(0).position;
@@ -130,7 +131,6 @@ public class PiecesController : MonoBehaviour
 
             if (!stopTouch)
             {
-
                 if (Distance.x < -swipeRange)
                 {
                     //outputText.text = "Left";
@@ -196,34 +196,10 @@ public class PiecesController : MonoBehaviour
                         transform.position += Vector3.down;
                         timer = 0;
                     }
-
-                    if (ValidPosition())
-                    {
-                        gameManager.UpdateGrid(this);
-
-                    }
-                    else
-                    {
-                        transform.position += Vector3.up;
-                        enabled = false;
-
-                        AnimationFall();
-
-                        if (!gameManager.isGameOver)
-                        {
-                            spawner.SpawnPieces();
-                        }
-
-                        if (gameManager.AboveGrid(this))
-                        {
-                            gameManager.GameOver();
-                        }
-                    }
-
+                    FallAlgorithm();
                 }
 
             }
-
         }
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
@@ -239,7 +215,10 @@ public class PiecesController : MonoBehaviour
                 //outputText.text = "Tap";
 
                 transform.Rotate(0, 0, 90);
-
+                foreach (Transform child in transform)
+                {
+                    child.Rotate(0, 0, -90);
+                }
                 if (ValidPosition())
                 {
                     gameManager.UpdateGrid(this);
@@ -247,6 +226,10 @@ public class PiecesController : MonoBehaviour
                 else
                 {
                     transform.Rotate(0, 0, -90);
+                    foreach (Transform child in transform)
+                    {
+                        child.Rotate(0, 0, 90);
+                    }
                 }
             }
 
@@ -322,7 +305,7 @@ public class PiecesController : MonoBehaviour
 
             FallAlgorithm();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, 90);
@@ -434,7 +417,7 @@ public class PiecesController : MonoBehaviour
 
         return true;
     }
-    
+
     public List<Transform> GetInvalidChildrenPositions()
     {
         List<Transform> badChildren = new List<Transform>();
