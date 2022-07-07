@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 463778e8de52f5543b8955766a7b7d28, type: 3}
-  m_Name: GuineaBlock
+  m_Name: CatBlock
   m_EditorClassIdentifier: 
   blockType: 0
-  blockColor: 2
-  blockAnimation: {fileID: 22100000, guid: 91fc1e5d1ebf3754dbf5e1f8b19bbbde, type: 2}
-  frontSprite: {fileID: -1208282411, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
+  blockColor: 0
+  blockAnimation: {fileID: 22100000, guid: cd5e0e700f6f1214aa12503dec2f571a, type: 2}
+  frontSprite: {fileID: 1337583548, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
   layer:
     serializedVersion: 2
     m_Bits: 64
+  overrideController: {fileID: 22100000, guid: b02f732e8c62a7541ad0aa86e7fa6942, type: 2}

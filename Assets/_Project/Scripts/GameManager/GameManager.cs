@@ -9,8 +9,6 @@ public class GameManager : Singleton<GameManager>
 
     public Transform[,] grid = new Transform[width, height];
 
-    public Food[,] gridFood = new Food[width, height];
-
     public int score;
 
     public float difficulty = 1;

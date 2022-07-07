@@ -10,7 +10,7 @@ public class BlockObject : MonoBehaviour
 
     public Sprite myFrontSprite;
 
-    private Block myBlock;
+    protected Block myBlock;
 
     protected Animator animator;
 
@@ -24,6 +24,14 @@ public class BlockObject : MonoBehaviour
     private string id;
 
     private float radius = 0.6f;
+
+    public GameObject eatEffect;
+
+    float fall;
+
+    protected GameManager gameManager;
+
+    public RaycastHit2D hit2D;
 
     public string ID
     {
@@ -47,12 +55,28 @@ public class BlockObject : MonoBehaviour
         animator.runtimeAnimatorController = myBlock.blockAnimation;
     }
 
+    private void Initialization()
+    {
+        gameManager = GameManager.GetInstance();
+        
+    }
+
+    private void Start()
+    {
+        Initialization();
+    }
+
+    private void Update()
+    {
+        GridFitting();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         FillNeighbors();
         SearchFood();
         FindAllFoodRecursively();
+        
     }
 
     private void FillNeighbors()
@@ -76,6 +100,7 @@ public class BlockObject : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
+
     }
 
 
@@ -98,4 +123,62 @@ public class BlockObject : MonoBehaviour
     {
         //
     }
+
+    private void GridFitting()
+    {
+        hit2D = Physics2D.Raycast(transform.position, Vector2.down, 1);
+        Debug.DrawRay(transform.position * 1, Vector2.down * 1, Color.red);
+
+        if (!hit2D.collider && transform.parent == null)
+        {
+            transform.position += Vector3.down;
+            print("to aqui");
+        }
+        else
+        {
+            return;
+
+        }
+    }
+
+    public void AutomaticFall()
+    {
+        if (Time.time - fall >= 1)
+        {
+            transform.position += Vector3.down;
+            fall = Time.time;
+            FallAlgorithm();
+        }
+    }
+
+    public void FallAlgorithm()
+    {
+        if (ValidPosition())
+        {
+            gameManager.UpdateGrid(GetComponentInParent<PiecesController>());
+        }
+        else
+        {
+            transform.position += Vector3.up;
+        }
+    }
+
+    private bool ValidPosition()
+    {
+        Vector2 posBlock = gameManager.RoundValue(transform.position);
+
+        if (!gameManager.InsideGrid(posBlock))
+        {
+            return false;
+        }
+
+
+        if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock) != transform)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 }

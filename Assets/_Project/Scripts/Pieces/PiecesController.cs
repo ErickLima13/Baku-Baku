@@ -27,12 +27,10 @@ public class PiecesController : MonoBehaviour
 
     public List<BlockObject> Blocks => blocks;
 
+    [SerializeField] private GameObject eatEffect;
+
     public void Initialize(Block animalBlock, Block foodBlock, int value)
     {
-        gameManager = GameManager.GetInstance();
-        spawner = Spawner.GetInstance();
-        timer = speed;
-
         var randomChoice = Random.Range(0, 2);
         if (randomChoice == 0)
         {
@@ -40,6 +38,8 @@ public class PiecesController : MonoBehaviour
             transform.GetChild(1).AddComponent<Animal>();
             blocks.Add(transform.GetChild(0).GetComponent<Food>());
             blocks.Add(transform.GetChild(1).GetComponent<Animal>());
+            blocks[0].eatEffect = eatEffect;
+            blocks[1].eatEffect = eatEffect;
             blocks[0].Initialize(foodBlock);
             blocks[1].Initialize(animalBlock);
 
@@ -54,6 +54,8 @@ public class PiecesController : MonoBehaviour
             transform.GetChild(1).AddComponent<Food>();
             blocks.Add(transform.GetChild(0).GetComponent<Animal>());
             blocks.Add(transform.GetChild(1).GetComponent<Food>());
+            blocks[0].eatEffect = eatEffect;
+            blocks[1].eatEffect = eatEffect;
             blocks[0].Initialize(animalBlock);
             blocks[1].Initialize(foodBlock);
 
@@ -72,6 +74,18 @@ public class PiecesController : MonoBehaviour
         }
     }
 
+    private void Initialization()
+    {
+        gameManager = GameManager.GetInstance();
+        spawner = Spawner.GetInstance();
+        timer = speed;
+    }
+
+    private void Start()
+    {
+        Initialization();
+    }
+
     private void Update()
     {
         if (!gameManager.isPaused)
@@ -82,8 +96,18 @@ public class PiecesController : MonoBehaviour
             Swipe();
 #endif
             AutomaticFall();
+            SelfDestruct();
         }
 
+
+    }
+
+    private void SelfDestruct()
+    {
+        if(transform.childCount == 0)
+        {
+            Destroy(gameObject,1f);
+        }
     }
 
     public void Swipe()
@@ -349,7 +373,7 @@ public class PiecesController : MonoBehaviour
         }
     }
 
-    private void FallAlgorithm()
+    public void FallAlgorithm()
     {
         List<Transform> badChildren = GetInvalidChildrenPositions();
         if (badChildren.Any() == false)
@@ -404,7 +428,7 @@ public class PiecesController : MonoBehaviour
         return true;
     }
     
-    private List<Transform> GetInvalidChildrenPositions()
+    public List<Transform> GetInvalidChildrenPositions()
     {
         List<Transform> badChildren = new List<Transform>();
         foreach (Transform child in transform)

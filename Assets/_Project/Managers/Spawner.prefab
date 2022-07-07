@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7180087340124294868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7180087340124294870}
+  - component: {fileID: 7180087340124294869}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7180087340124294870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180087340124294868}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.42, y: 14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7180087340124294869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180087340124294868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf00899d09312e14a84863d8dcf03683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotations:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 90}
+  - {x: 0, y: 0, z: 180}
+  - {x: 0, y: 0, z: -90}
+  _piecesController: {fileID: 5109635819970339655, guid: f4394586a25918e468ab28285f46b527, type: 3}
+  animalBlocks:
+  - {fileID: 11400000, guid: b8d473a3b374bc54ba4b1185848e4b15, type: 2}
+  - {fileID: 11400000, guid: 3afa830c2447b8749ae76ba655624f2a, type: 2}
+  - {fileID: 11400000, guid: 14a2bfae5aac79f458bd7ae8dd53a82c, type: 2}
+  - {fileID: 11400000, guid: 1b727f2d0ef85ff4c84593d0854f5181, type: 2}
+  - {fileID: 11400000, guid: 76f5fa56fac20d349bff338f6e61d143, type: 2}
+  foodBlocks:
+  - {fileID: 11400000, guid: 65206d2cdc8ba3b42b413cbe334f7137, type: 2}
+  - {fileID: 11400000, guid: 9d6c03a90632ca94cbc8e83de6b50b8b, type: 2}
+  - {fileID: 11400000, guid: 1c63348d87e93844183d1a25f379fc04, type: 2}
+  - {fileID: 11400000, guid: 3c3318984467d224ca3be0783791ca48, type: 2}
+  - {fileID: 11400000, guid: 16b508139468fe040907a7cbb89902fd, type: 2}

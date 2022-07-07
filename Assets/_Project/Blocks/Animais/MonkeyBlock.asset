@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 463778e8de52f5543b8955766a7b7d28, type: 3}
-  m_Name: CatBlock
+  m_Name: MonkeyBlock
   m_EditorClassIdentifier: 
   blockType: 0
-  blockColor: 0
-  blockAnimation: {fileID: 22100000, guid: cd5e0e700f6f1214aa12503dec2f571a, type: 2}
-  frontSprite: {fileID: 1337583548, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
+  blockColor: 1
+  blockAnimation: {fileID: 22100000, guid: a176526efcdf43b4291d8d95a8ea72c0, type: 2}
+  frontSprite: {fileID: -1859272244, guid: 34a96d9a8ee8b024e814ef7825f0ba07, type: 3}
   layer:
     serializedVersion: 2
     m_Bits: 64
+  overrideController: {fileID: 22100000, guid: aae8968dfa50b6f41aa02ec7272d4a7a, type: 2}
