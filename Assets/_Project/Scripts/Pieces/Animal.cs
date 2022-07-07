@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Animal : BlockObject
 {
-    //private GameManager gameManager;
+    private GameManager gameManager;
 
     private GameObject cloneEatEffect;
 

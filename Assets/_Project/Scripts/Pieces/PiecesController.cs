@@ -80,7 +80,6 @@ public class PiecesController : MonoBehaviour
         spawner = Spawner.GetInstance();
         timer = speed;
     }
-
     private void Start()
     {
         Initialization();
@@ -373,7 +372,7 @@ public class PiecesController : MonoBehaviour
         }
     }
 
-    public void FallAlgorithm()
+    private void FallAlgorithm()
     {
         List<Transform> badChildren = GetInvalidChildrenPositions();
         if (badChildren.Any() == false)
@@ -428,7 +427,7 @@ public class PiecesController : MonoBehaviour
         return true;
     }
     
-    public List<Transform> GetInvalidChildrenPositions()
+    private List<Transform> GetInvalidChildrenPositions()
     {
         List<Transform> badChildren = new List<Transform>();
         foreach (Transform child in transform)
