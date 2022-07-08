@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
 
     public int life = 3;
 
-    public GameObject[] pieces;
+    public List<GameObject> pieces;
 
     public bool InsideGrid(Vector2 pos)
     {
@@ -93,7 +93,9 @@ public class GameManager : Singleton<GameManager>
         
         foreach(GameObject g in pieces)
         {
-            Destroy(g);
+            //Destroy(g);
+            g.SetActive(false);
+            print("Limpando");
         }
 
         if(life <= 0)
