@@ -57,6 +57,30 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
+    
+    public void UpdateGrid(Transform blockTransform)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (grid[x, y] != null)
+                {
+                    if (grid[x, y] == blockTransform)
+                    {
+                        grid[x, y] = null;
+                    }
+                }
+            }
+        }
+        
+        Vector2 pos = RoundValue(blockTransform.position);
+
+        if (pos.y < height)
+        {
+            grid[(int)pos.x, (int)pos.y] = blockTransform;
+        }
+    }
 
     public Transform PosTransformGrid(Vector2 pos)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RaycastDetect : MonoBehaviour
 {
     private RaycastHit2D hit2D;
+    private bool updatedGrid;
 
     private void FixedUpdate()
     {
@@ -21,12 +22,13 @@ public class RaycastDetect : MonoBehaviour
 
         if (!hit2D.collider)
         {
+            updatedGrid = false;
             transform.position += Vector3.down;
-            //print("to aqui");
         }
-        else
+        else if(!updatedGrid)
         {
-            return;
+            updatedGrid = true;
+            GameManager.GetInstance().UpdateGrid(transform);
         }
     }
 }
