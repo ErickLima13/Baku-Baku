@@ -15,8 +15,7 @@ public class PiecesController : MonoBehaviour
 
     private List<BlockObject> blocks = new List<BlockObject>();
 
-    [Header("Touch")]
-    private Vector2 startTouchPosition;
+    [Header("Touch")] private Vector2 startTouchPosition;
     private Vector2 currentPosition;
     private Vector2 endTouchPosition;
     private bool stopTouch = false;
@@ -107,8 +106,6 @@ public class PiecesController : MonoBehaviour
             AutomaticFall();
             SelfDestruct();
         }
-
-
     }
 
     private void SelfDestruct()
@@ -157,13 +154,11 @@ public class PiecesController : MonoBehaviour
                     if (ValidPosition())
                     {
                         gameManager.UpdateGrid(this);
-
                     }
                     else
                     {
                         transform.position += Vector3.right;
                     }
-
                 }
                 else if (Distance.x > swipeRange)
                 {
@@ -181,13 +176,11 @@ public class PiecesController : MonoBehaviour
                     if (ValidPosition())
                     {
                         gameManager.UpdateGrid(this);
-
                     }
                     else
                     {
                         transform.position += Vector3.left;
                     }
-
                 }
                 else if (Distance.y > swipeRange)
                 {
@@ -206,9 +199,9 @@ public class PiecesController : MonoBehaviour
                         transform.position += Vector3.down;
                         timer = 0;
                     }
+
                     FallAlgorithm();
                 }
-
             }
         }
 
@@ -229,6 +222,7 @@ public class PiecesController : MonoBehaviour
                 {
                     child.Rotate(0, 0, -90);
                 }
+
                 if (ValidPosition())
                 {
                     gameManager.UpdateGrid(this);
@@ -242,11 +236,9 @@ public class PiecesController : MonoBehaviour
                     }
                 }
             }
-
         }
-
-
     }
+
     private void Move()
     {
         if (transform.childCount <= 1)
@@ -254,7 +246,8 @@ public class PiecesController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) ||
+            Input.GetKeyUp(KeyCode.DownArrow))
         {
             timer = speed;
         }
@@ -272,7 +265,6 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
-
             }
             else
             {
@@ -282,7 +274,6 @@ public class PiecesController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-
             timer += Time.deltaTime;
 
             if (timer > speed)
@@ -294,13 +285,11 @@ public class PiecesController : MonoBehaviour
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
-
             }
             else
             {
                 transform.position += Vector3.right;
             }
-
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
@@ -323,10 +312,10 @@ public class PiecesController : MonoBehaviour
             {
                 child.Rotate(0, 0, -90);
             }
+
             if (ValidPosition())
             {
                 gameManager.UpdateGrid(this);
-
             }
             else
             {
@@ -365,6 +354,7 @@ public class PiecesController : MonoBehaviour
         {
             difficulty = gameManager.difficulty * 8;
         }
+
         if (Time.time - fall >= (1 / difficulty) && !(Input.GetKey(KeyCode.DownArrow) && transform.childCount > 1))
         {
             transform.position += Vector3.down;
@@ -418,8 +408,10 @@ public class PiecesController : MonoBehaviour
             {
                 return false;
             }
+
             //Se tem algo na posição que quero E o pai que está na posição é diferente do meu pai
-            if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
+            if (gameManager.PosTransformGrid(posBlock) != null &&
+                gameManager.PosTransformGrid(posBlock).parent != transform)
             {
                 return false;
             }
@@ -439,7 +431,8 @@ public class PiecesController : MonoBehaviour
                 badChildren.Add(child);
             }
             //Se tem algo na posição que quero E o pai que está na posição é diferente do meu pai
-            else if (gameManager.PosTransformGrid(posBlock) != null && gameManager.PosTransformGrid(posBlock).parent != transform)
+            else if (gameManager.PosTransformGrid(posBlock) != null &&
+                     gameManager.PosTransformGrid(posBlock).parent != transform)
             {
                 badChildren.Add(child);
             }
@@ -447,5 +440,4 @@ public class PiecesController : MonoBehaviour
 
         return badChildren;
     }
-
 }
