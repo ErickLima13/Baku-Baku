@@ -28,6 +28,23 @@ public class PiecesController : MonoBehaviour
 
     [SerializeField] private GameObject eatEffect;
 
+    #region Components Blocks
+
+    public BoxCollider2D boxColliderBlock;
+    public BoxCollider2D boxColliderBlock2;
+
+    public RaycastDetect raycast;
+    public RaycastDetect raycast2;
+
+    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer2;
+
+    public Animator animator;
+    public Animator animator2;
+
+    #endregion
+
+
     public void Initialize(Block animalBlock, Block foodBlock, int value)
     {
         var randomChoice = Random.Range(0, 2);
@@ -44,8 +61,6 @@ public class PiecesController : MonoBehaviour
 
             blocks[0].ID = "F" + value.ToString();
             blocks[1].ID = "A" + value.ToString();
-
-
         }
         else
         {
@@ -62,17 +77,10 @@ public class PiecesController : MonoBehaviour
             blocks[1].ID = "F" + value.ToString();
         }
 
-        for (int i = 0; i < blocks.Count; i++)
-        {
-            blocks[i].GetComponent<BoxCollider2D>().enabled = false;
-        }
-
         foreach (Transform child in transform)
         {
             child.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z * -1);
         }
-
-
     }
 
     private void Initialization()
@@ -107,7 +115,9 @@ public class PiecesController : MonoBehaviour
     {
         if (transform.childCount == 0)
         {
-            Destroy(gameObject, 1f);
+            //Destroy(gameObject, 1f);
+
+            gameObject.SetActive(false);
         }
     }
 
@@ -333,18 +343,18 @@ public class PiecesController : MonoBehaviour
     {
         if (blocks[0] != null)
         {
-            blocks[0].GetComponent<BoxCollider2D>().enabled = true;
-            blocks[0].GetComponent<RaycastDetect>().enabled = true;
-            blocks[0].GetComponent<SpriteRenderer>().sprite = blocks[0].myFrontSprite;
-            blocks[0].GetComponent<Animator>().enabled = false;
+            boxColliderBlock.enabled = true;
+            raycast.enabled = true;
+            spriteRenderer.sprite = blocks[0].myFrontSprite;
+            animator.enabled = false;
         }
 
         if (blocks[1] != null)
         {
-            blocks[1].GetComponent<BoxCollider2D>().enabled = true;
-            blocks[1].GetComponent<RaycastDetect>().enabled = true;
-            blocks[1].GetComponent<SpriteRenderer>().sprite = blocks[1].myFrontSprite;
-            blocks[1].GetComponent<Animator>().enabled = false;
+            boxColliderBlock2.enabled = true;
+            raycast2.enabled = true;
+            spriteRenderer2.sprite = blocks[1].myFrontSprite;
+            animator2.enabled = false;
         }
     }
 

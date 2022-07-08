@@ -26,11 +26,7 @@ public class BlockObject : MonoBehaviour
 
     public GameObject eatEffect;
 
-    float fall;
-
     protected GameManager gameManager;
-
-    private RaycastDetect raycastDetect;
 
     public string ID
     {
@@ -57,7 +53,6 @@ public class BlockObject : MonoBehaviour
     private void Initialization()
     {
         gameManager = GameManager.GetInstance();
-        //raycastDetect = GetComponent<RaycastDetect>();
     }
 
     private void Start()

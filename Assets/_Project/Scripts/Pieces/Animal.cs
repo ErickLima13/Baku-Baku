@@ -6,16 +6,22 @@ using UnityEngine;
 
 public class Animal : BlockObject
 {
-    //private GameManager gameManager;
-
     private GameObject cloneEatEffect;
+
+    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRendererClone;
+
+    private Animator animatorClone;
 
     void Start()
     {
         gameManager = GameManager.GetInstance();
-
         cloneEatEffect = Instantiate(eatEffect, transform);
         cloneEatEffect.SetActive(false);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRendererClone = cloneEatEffect.GetComponent<SpriteRenderer>();
+        animatorClone = cloneEatEffect.GetComponent<Animator>();
     }
 
     protected override void FindAllFoodRecursively()
@@ -51,12 +57,8 @@ public class Animal : BlockObject
     {
         yield return new WaitForSeconds(0.1f);
 
-        GetComponent<SpriteRenderer>().enabled = false;
-
-        //var cloneEatEffect = Instantiate(eatEffect, transform);
-
+        spriteRenderer.enabled = false;
         cloneEatEffect.SetActive(true);
-        var animatorClone = cloneEatEffect.GetComponent<Animator>();
         animatorClone.runtimeAnimatorController = myBlock.overrideController;
 
         foreach (Food f in processed)
@@ -65,7 +67,7 @@ public class Animal : BlockObject
             {
                 if(f.transform.position.x >= 3)
                 {
-                    cloneEatEffect.GetComponent<SpriteRenderer>().flipX = true;
+                    spriteRendererClone.flipX = true;
                 }
 
                 transform.position = f.transform.position;

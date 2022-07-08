@@ -95,7 +95,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5109635818810535962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!95 &5109635818810535964
 Animator:
@@ -262,7 +262,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5109635819063757121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -300,7 +300,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!95 &5109635819063757127
 Animator:
@@ -386,3 +386,11 @@ MonoBehaviour:
   swipeRange: 50
   tapRange: 10
   eatEffect: {fileID: 2864969874526829554, guid: a52e3817ad94a8f41a0acc0d86c31606, type: 3}
+  boxColliderBlock: {fileID: 5109635819063757124}
+  boxColliderBlock2: {fileID: 5109635818810535967}
+  raycast: {fileID: 3184151042113118350}
+  raycast2: {fileID: 4867574182819648457}
+  spriteRenderer: {fileID: 5109635819063757125}
+  spriteRenderer2: {fileID: 5109635818810535936}
+  animator: {fileID: 5109635819063757127}
+  animator2: {fileID: 5109635818810535964}
