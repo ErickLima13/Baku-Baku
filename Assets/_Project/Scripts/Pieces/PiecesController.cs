@@ -81,9 +81,6 @@ public class PiecesController : MonoBehaviour
         {
             child.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z * -1);
         }
-
-       
-
     }
 
     private void Initialization()
@@ -91,11 +88,6 @@ public class PiecesController : MonoBehaviour
         gameManager = GameManager.GetInstance();
         spawner = Spawner.GetInstance();
         timer = speed;
-
-        for (int i = 0; i < blocks.Count; i++)
-        {
-            gameManager.pieces.Add(blocks[i].gameObject);
-        }
     }
 
     private void Start()
@@ -124,7 +116,6 @@ public class PiecesController : MonoBehaviour
         if (transform.childCount == 0)
         {
             //Destroy(gameObject, 1f);
-
 
             gameObject.SetActive(false);
         }
@@ -414,7 +405,7 @@ public class PiecesController : MonoBehaviour
             }
         }
 
-        //gameManager.pieces = GameObject.FindGameObjectsWithTag("Player");
+        gameManager.pieces = GameObject.FindGameObjectsWithTag("Player");
     }
 
     private bool ValidPosition()

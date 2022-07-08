@@ -71,19 +71,15 @@ public class Animal : BlockObject
                 }
 
                 transform.position = f.transform.position;
-                //Destroy(f.gameObject, 0.1f);
-                f.gameObject.SetActive(false);
-                gameManager.pieces.Remove(f.gameObject);
+                Destroy(f.gameObject, 0.1f);
+
                 yield return new WaitForSeconds(0.2f);
             }
         }
 
         gameManager.UpdateScore(processed.Count);
-        //processed.Clear();
+        processed.Clear();
         Destroy(gameObject, 0.7f);
-        gameManager.pieces.Remove(gameObject);
-        //yield return new WaitForSeconds(0.7f);
-        //gameObject.SetActive(false);
         StopAllCoroutines();
     }
 }

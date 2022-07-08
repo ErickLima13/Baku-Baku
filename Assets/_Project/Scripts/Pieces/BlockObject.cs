@@ -62,12 +62,9 @@ public class BlockObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            FillNeighbors();
-            SearchFood();
-            FindAllFoodRecursively();
-        }
+        FillNeighbors();
+        SearchFood();
+        FindAllFoodRecursively();
     }
 
     private void FillNeighbors()
@@ -87,12 +84,12 @@ public class BlockObject : MonoBehaviour
         neighbors = temporary.Distinct().ToList();
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(transform.position, radius);
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, radius);
 
-    //}
+    }
 
     private void SearchFood()
     {
