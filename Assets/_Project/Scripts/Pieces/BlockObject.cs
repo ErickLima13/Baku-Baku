@@ -67,7 +67,7 @@ public class BlockObject : MonoBehaviour
         FindAllFoodRecursively();
     }
 
-    private void FillNeighbors()
+    public void FillNeighbors()
     {
         Collider2D[] hitInfo;
         List<BlockObject> temporary = new();
@@ -75,13 +75,15 @@ public class BlockObject : MonoBehaviour
 
         foreach (Collider2D c in hitInfo)
         {
-            if(c.GetComponent<BlockObject>().ID != ID)
+            if (c.GetComponent<BlockObject>().ID != ID)
             {
                 temporary.Add(c.GetComponent<BlockObject>());
             }
         }
 
         neighbors = temporary.Distinct().ToList();
+
+
     }
 
     private void OnDrawGizmos()
@@ -91,10 +93,10 @@ public class BlockObject : MonoBehaviour
 
     }
 
-    private void SearchFood()
+    public void SearchFood()
     {
         List<Food> temporary = new();
-        
+
         for (int i = 0; i < neighbors.Count; i++)
         {
             if (neighbors[i]._blockColor == _blockColor && neighbors[i]._blockType == BlockType.Food)
@@ -104,10 +106,17 @@ public class BlockObject : MonoBehaviour
             }
         }
         foods = temporary.Distinct().ToList();
+
+
     }
-    
+
     protected virtual void FindAllFoodRecursively()
     {
         //
+    }
+
+    private void OnDestroy()
+    {
+        gameManager.UpdateScore(1);
     }
 }

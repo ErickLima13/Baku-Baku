@@ -24,6 +24,20 @@ public class Animal : BlockObject
         animatorClone = cloneEatEffect.GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (transform.parent == null)
+        {
+            FillNeighbors();
+            SearchFood();
+
+            if(foods.Count > 0)
+            {
+                FindAllFoodRecursively();
+            }
+        }
+    }
+
     protected override void FindAllFoodRecursively()
     {
         base.FindAllFoodRecursively();
@@ -55,7 +69,7 @@ public class Animal : BlockObject
 
     private IEnumerator EatAnimation()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         spriteRenderer.enabled = false;
         cloneEatEffect.SetActive(true);
@@ -65,21 +79,29 @@ public class Animal : BlockObject
         {
             if (f != null)
             {
-                if(f.transform.position.x >= 3)
+                if (f.transform.position.x >= 3)
                 {
                     spriteRendererClone.flipX = true;
                 }
 
-                transform.position = f.transform.position;
-                Destroy(f.gameObject, 0.1f);
+                f.neighbors.Remove(f);
 
-                yield return new WaitForSeconds(0.2f);
+                transform.position = f.transform.position;
+
+                //yield return new WaitForSeconds(0.1f);
+
+                Destroy(f.gameObject, 0.2f);
+
             }
         }
 
-        gameManager.UpdateScore(processed.Count);
+
+
+        //gameManager.UpdateScore(processed.Count);
         processed.Clear();
-        Destroy(gameObject, 0.7f);
-        StopAllCoroutines();
+        Destroy(gameObject, 1f);
+        //StopAllCoroutines();
     }
+
+
 }

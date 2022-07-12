@@ -112,9 +112,9 @@ public class PiecesController : MonoBehaviour
     {
         if (transform.childCount == 0)
         {
-            //Destroy(gameObject, 1f);
+            Destroy(gameObject, 1f);
 
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 

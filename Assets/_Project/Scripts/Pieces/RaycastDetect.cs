@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RaycastDetect : MonoBehaviour
 {
     private RaycastHit2D hit2D;
-    private bool updatedGrid;
+    public bool updatedGrid;
 
     private void FixedUpdate()
     {
         if (transform.parent == null)
         {
             GridFitting();
+        }
+
+        if(transform.position.y <= 0)
+        {
+            enabled = false;
         }
     }
 
@@ -25,7 +28,7 @@ public class RaycastDetect : MonoBehaviour
             updatedGrid = false;
             transform.position += Vector3.down;
         }
-        else if(!updatedGrid)
+        else if (!updatedGrid)
         {
             updatedGrid = true;
             GameManager.GetInstance().UpdateGrid(transform);
