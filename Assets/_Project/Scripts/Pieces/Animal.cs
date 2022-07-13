@@ -24,23 +24,35 @@ public class Animal : BlockObject
         animatorClone = cloneEatEffect.GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        if (transform.parent == null)
-        {
-            FillNeighbors();
-            SearchFood();
+    //private void LateUpdate()
+    //{
+    //    if (transform.parent == null)
+    //    {
+    //        FillNeighbors();
+    //        SearchFood();
 
-            if(foods.Count > 0)
-            {
-                FindAllFoodRecursively();
-            }
+    //        if (foods.Count > 0)
+    //        {
+    //            FindAllFoodRecursively();
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FillNeighbors();
+        SearchFood();
+        FindAllFoodRecursively();
+
+        if (collision.gameObject.TryGetComponent(out Food food) && food._blockColor == _blockColor)
+        {
+            
         }
     }
 
-    protected override void FindAllFoodRecursively()
+    public  void FindAllFoodRecursively()
     {
-        base.FindAllFoodRecursively();
+        //base.FindAllFoodRecursively();
         if (foods.Any() == false) return;
         List<Food> toSearch = new List<Food>() { foods[0] };
         processed = new List<Food>();
@@ -67,7 +79,7 @@ public class Animal : BlockObject
         }
     }
 
-    private IEnumerator EatAnimation()
+    public IEnumerator EatAnimation()
     {
         yield return new WaitForSeconds(0.2f);
 

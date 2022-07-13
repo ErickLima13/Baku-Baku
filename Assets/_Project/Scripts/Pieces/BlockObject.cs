@@ -60,12 +60,12 @@ public class BlockObject : MonoBehaviour
         Initialization();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        FillNeighbors();
-        SearchFood();
-        FindAllFoodRecursively();
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    FillNeighbors();
+    //    SearchFood();
+    //    //FindAllFoodRecursively();
+    //}
 
     public void FillNeighbors()
     {
@@ -110,10 +110,10 @@ public class BlockObject : MonoBehaviour
 
     }
 
-    protected virtual void FindAllFoodRecursively()
-    {
-        //
-    }
+    //protected virtual void FindAllFoodRecursively()
+    //{
+    //    //
+    //}
 
     private void OnDestroy()
     {

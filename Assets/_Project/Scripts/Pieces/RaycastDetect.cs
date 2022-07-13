@@ -11,11 +11,6 @@ public class RaycastDetect : MonoBehaviour
         {
             GridFitting();
         }
-
-        if(transform.position.y <= 0)
-        {
-            enabled = false;
-        }
     }
 
     private void GridFitting()
@@ -32,6 +27,8 @@ public class RaycastDetect : MonoBehaviour
         {
             updatedGrid = true;
             GameManager.GetInstance().UpdateGrid(transform);
+
+           
         }
     }
 }
